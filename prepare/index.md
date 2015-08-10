@@ -78,7 +78,7 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 * Install the images (adjust BRIDGE appropriately)
 
 		BRIDGE=br0
-		for VM in atomic-host-01 atomic-host-02 atomic-host-03; do
+		for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host-04; do
 			virt-install --import --name "${VM}" \
 				--ram 1024 --vcpus 2 \
 				--disk path=/var/lib/libvirt/images/"${VM}".qcow2,format=qcow2,bus=virtio \
@@ -90,13 +90,15 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 * Create paths to separate host data
 
-		mkdir atomic-host-{01,02,03}
+		mkdir atomic-master atomic-host-{01,02,03,04}
 
 * Install the Atomic cloud-init ISO image
 
+		mv atomic-master-cidata.iso atomic-master/
 		mv atomic-host-01-cidata.iso atomic-host-01/
 		mv atomic-host-02-cidata.iso atomic-host-02/
 		mv atomic-host-03-cidata.iso atomic-host-03/
+		mv atomic-host-04-cidata.iso atomic-host-04/
 
 * Convert the qcow2 image to vdi for VirtualBox usages
 
