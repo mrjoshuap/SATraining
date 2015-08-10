@@ -7,4 +7,3 @@ ssh_pwauth: True
 #ssh_authorized_keys:
 #  - ssh-rsa AAA...SDvz user1@yourdomain.com
 #  - ssh-rsa AAB...QTuo user2@yourdomain.com
-

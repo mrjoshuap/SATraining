@@ -4,7 +4,7 @@ When: October 2-3, 2015
 
 Where: Ohio LinuxFest Institute / Columbus, OH
 
-_Please be advised that this training may require Internet access, such as downloading updates and Docker images._
+_Please be advised that this training may require Internet access for things such as downloading updates and Docker images._
 
 ## Overview
 
@@ -25,7 +25,7 @@ In order to make best use of lab time, please review the deployment options and 
 1. A working KVM environment (preferred)
 1. A working Virtual Box environment
 
-Before the training begins, please plan on creating the necessary Virtual Machines that will be used for this class as described in the document.  Minimal time will be allocated during the training to complete these steps.
+Before the training begins, please plan on creating the necessary Virtual Machines that will be used for this class as described in this document.  Minimal time will be allocated during the training to complete these steps.
 
 ### Notes, Comments and Pointers
 
@@ -47,9 +47,11 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 * Grab the ```cloud-init``` images
 
+		wget https://people.redhat.com/jpreston/atomic-training/atomic-master-cidata.iso
 		wget https://people.redhat.com/jpreston/atomic-training/atomic-host-01-cidata.iso
 		wget https://people.redhat.com/jpreston/atomic-training/atomic-host-02-cidata.iso
 		wget https://people.redhat.com/jpreston/atomic-training/atomic-host-03-cidata.iso
+		wget https://people.redhat.com/jpreston/atomic-training/atomic-host-04-cidata.iso
 
 * Grab the Fedora Cloud Atomic image
 
@@ -57,17 +59,21 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 ## Preferred Deployment Option: KVM Environment Setup
 
-* Install the Atomic ```cloud-init``` image
+* Install the Atomic ```cloud-init``` images
 
+		sudo cp atomic-master-cidata.iso /var/lib/libvirt/images/
 		sudo cp atomic-host-01-cidata.iso /var/lib/libvirt/images/
 		sudo cp atomic-host-02-cidata.iso /var/lib/libvirt/images/
 		sudo cp atomic-host-03-cidata.iso /var/lib/libvirt/images/
+		sudo cp atomic-host-04-cidata.iso /var/lib/libvirt/images/
 
-* Create three copies of the image (one for each host)
+* Create five copies of the image (one for each host)
 
+		sudo cp Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 /var/lib/libvirt/images/atomic-master.qcow2
 		sudo cp Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 /var/lib/libvirt/images/atomic-host-01.qcow2
 		sudo cp Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 /var/lib/libvirt/images/atomic-host-02.qcow2
 		sudo cp Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 /var/lib/libvirt/images/atomic-host-03.qcow2
+		sudo cp Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 /var/lib/libvirt/images/atomic-host-04.qcow2
 
 * Install the images (adjust BRIDGE appropriately)
 
@@ -98,9 +104,10 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 			Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 \
 			Fedora-Cloud-Atomic-22-20150521.x86_64.vdi
 
-* Create three VMs and attach the appropriate images
+* Create three VMs and attach the appropriate images (adjust BRIDGE appropriately)
 
-		for VM in atomic-host-01 atomic-host-02 atomic-host-03; do
+		BRIDGE=en0
+		for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host-04; do
 			# Copy the cloud image to a unique disk image for each host
 			cp Fedora-Cloud-Atomic-22-20150521.x86_64.vdi "${VM}/${VM}.vdi"
 			# Reset the UUID for the disk image so it doesn't clash
@@ -131,21 +138,25 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 			VBoxManage modifyvm "${VM}" --ioapic on
 			VBoxManage modifyvm "${VM}" --boot1 dvd --boot2 disk --boot3 none --boot4 none
 			VBoxManage modifyvm "${VM}" --memory 1024 --vram 128
-			VBoxManage modifyvm "${VM}" --nic1 nat --bridgeadapter1 en0
+			VBoxManage modifyvm "${VM}" --nic1 nat --bridgeadapter1 ${BRIDGE}
 		done
 
-# Verify the Atomic Hosts
+## Verify the Atomic Hosts
 
-Now you should have three atomic hosts:
+Now you should have five atomic hosts:
 
+* ```atomic-master```
 * ```atomic-host-01```
 * ```atomic-host-02```
 * ```atomic-host-03```
+* ```atomic-host-04```
 
 Power them on, validate the host names and make sure you can login using the following credentials:
 
 * Username: ```fedora```
 * Password: ```atomic```
+
+You might also want to record IPs to make your life easier.
 
 Now, wait until the class, you may want to run through some reference materials!
 
