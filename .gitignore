@@ -1,0 +1,6 @@
+# Ignore any ISO images we generate for our cloud-init data
+*.iso
+# Ignore any QEMU disk images
+*.qcow2
+# Ignore an VirtualBox disk images
+*.vdi
