@@ -4,5 +4,5 @@
 *.qcow2
 # Ignore an VirtualBox disk images
 *.vdi
-# Ignore any .html files since we generage them as well
-*.html
+# Ignore any generated .html files
+prepare/index.html
