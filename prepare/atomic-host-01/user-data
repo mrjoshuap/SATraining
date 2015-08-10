@@ -1,0 +1,10 @@
+#cloud-config
+password: atomic
+chpasswd: {expire: False}
+#comment this after you add your ssh public keys
+ssh_pwauth: True
+#uncomment these and add your ssh public keys
+#ssh_authorized_keys:
+#  - ssh-rsa AAA...SDvz user1@yourdomain.com
+#  - ssh-rsa AAB...QTuo user2@yourdomain.com
+
