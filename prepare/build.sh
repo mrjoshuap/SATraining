@@ -10,6 +10,6 @@ done
 # Generate our index file
 type -a markdown >/dev/null 2>&1 && {
   cat header.html
-  markdown index.md
+  markdown --html4tags index.md
   cat footer.html
 } > index.html
