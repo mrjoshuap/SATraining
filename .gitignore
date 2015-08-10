@@ -6,3 +6,5 @@
 *.vdi
 # Ignore any generated .html files
 prepare/index.html
+# Ignore log files
+*.log
