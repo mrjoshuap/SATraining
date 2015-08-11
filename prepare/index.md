@@ -106,6 +106,10 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 			Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2 \
 			Fedora-Cloud-Atomic-22-20150521.x86_64.vdi
 
+* Create a NAT network and configure it
+
+		VBoxManage natnetwork add --netname "vboxnat0" --network 192.168.122.0/24 --enable --dhcp on
+
 * Create three VMs and attach the appropriate images (adjust BRIDGE appropriately)
 
 		BRIDGE=en0
@@ -140,7 +144,16 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 			VBoxManage modifyvm "${VM}" --ioapic on
 			VBoxManage modifyvm "${VM}" --boot1 dvd --boot2 disk --boot3 none --boot4 none
 			VBoxManage modifyvm "${VM}" --memory 1024 --vram 128
-			VBoxManage modifyvm "${VM}" --nic1 nat --bridgeadapter1 ${BRIDGE}
+			VBoxManage modifyvm "${VM}" --nic1 natnetwork --nat-network1 vboxnat0 --bridgeadapter1 ${BRIDGE}
+			# Create a storage disk for our docker images
+			test -f "${VM}/${VM}-docker-images.vdi" || VBoxManage createhd \
+				--filename "${VM}/${VM}-docker-images.vdi" \
+				--size 10240
+			# Attach our disk for docker images
+			VBoxManage storageattach "${VM}" \
+				--storagectl "SCSI Controller" \
+				--port 1 --device 0 --type hdd \
+				--medium "${VM}/${VM}-docker-images.vdi"
 		done
 
 ## Verify the Atomic Hosts
