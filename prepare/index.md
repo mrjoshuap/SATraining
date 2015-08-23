@@ -47,11 +47,11 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 * Grab the ```cloud-init``` images
 
-      wget https://people.redhat.com/jpreston/atomic-training/atomic-master-cidata.iso
-      wget https://people.redhat.com/jpreston/atomic-training/atomic-host-01-cidata.iso
-      wget https://people.redhat.com/jpreston/atomic-training/atomic-host-02-cidata.iso
-      wget https://people.redhat.com/jpreston/atomic-training/atomic-host-03-cidata.iso
-      wget https://people.redhat.com/jpreston/atomic-training/atomic-host-04-cidata.iso
+    wget https://people.redhat.com/jpreston/atomic-training/atomic-master-cidata.iso
+    wget https://people.redhat.com/jpreston/atomic-training/atomic-host-01-cidata.iso
+    wget https://people.redhat.com/jpreston/atomic-training/atomic-host-02-cidata.iso
+    wget https://people.redhat.com/jpreston/atomic-training/atomic-host-03-cidata.iso
+    wget https://people.redhat.com/jpreston/atomic-training/atomic-host-04-cidata.iso
 
 * Grab the Fedora Cloud Atomic image
 
