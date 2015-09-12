@@ -14,8 +14,8 @@ The purpose of this training to to quickly demonstrate an application-centric IT
 
 ## Downloads
 
-1. [CentOS Atomic](http://cloud.centos.org/centos/7/atomic/images/)
 1. [Fedora Atomic](https://getfedora.org/cloud/download/atomic.html)
+1. [CentOS Atomic](http://cloud.centos.org/centos/7/atomic/images/)
 1. [Red Hat Enterprise Linux Atomic Host](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
 
 ## Order that the labs should be delivered:
