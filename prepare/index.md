@@ -115,6 +115,7 @@ You'll need an active subscription to download from [access.redhat.com](https://
 
 ```
       BRIDGE=virbr0
+      LAST_OCTET=10
       for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host-04; do
         test -f /var/lib/libvirt/images/${VM}-docker.qcow2 \
           && rm -f /var/lib/libvirt/images/${VM}-docker.qcow2
@@ -127,6 +128,11 @@ You'll need an active subscription to download from [access.redhat.com](https://
           --disk path=/var/lib/libvirt/images/${VM}-cidata.iso,device=cdrom \
           --network bridge=${BRIDGE} --force \
           --noautoconsole
+        A_MAC=$(virsh domiflist ${VM} | tail -n 2 | head -n 1 | awk '{print $5}')
+        virsh net-update default add ip-dhcp-host \
+          "<host mac='${A_MAC}' name='${VM}' ip='192.168.122.${LAST_OCTET}' />" \
+          --live --config
+          LAST_OCTET=$((${LAST_OCTET}+1))
       done
 ```
 
