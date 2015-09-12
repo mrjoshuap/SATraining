@@ -46,7 +46,7 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 ## Download Required Softwares
 
-* Grab the ```cloud-init``` images
+### Grab the ```cloud-init``` images
 
 ```
     wget https://people.redhat.com/jpreston/atomic-training/atomic-master-cidata.iso
@@ -56,23 +56,23 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
     wget https://people.redhat.com/jpreston/atomic-training/atomic-host-04-cidata.iso
 ```
 
-* Grab the Cloud Atomic image
+### Grab the Cloud Atomic image
 
 We want to download the appropriate cloud image.
 
-For Fedora Cloud Atomic
+#### Fedora Cloud Atomic
 
 ```
     wget https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2
 ```
 
-For CentOS Cloud Atomic
+#### CentOS Cloud Atomic
 
 ```
     wget http://cloud.centos.org/centos/7/atomic/images/CentOS-Atomic-Host-7.1.2-GenericCloud.qcow2
 ```
 
-For Red Hat Enterprise Linux Atomic Host
+#### Red Hat Enterprise Linux Atomic Host
 
 You'll need an active subscription to download from [access.redhat.com](https://access.redhat.com/downloads/content/271/ver=/rhel---7/7.1.4/x86_64/product-downloads)
 
@@ -95,7 +95,7 @@ Based on which image you downloaded, we need to set an environment variable of t
 
 ## Preferred Deployment Option: KVM Environment Setup
 
-* Install the Atomic ```cloud-init``` images
+### Install the Atomic ```cloud-init``` images
 
 ```
       sudo cp atomic-master-cidata.iso /var/lib/libvirt/images/
@@ -105,7 +105,7 @@ Based on which image you downloaded, we need to set an environment variable of t
       sudo cp atomic-host-04-cidata.iso /var/lib/libvirt/images/
 ```
 
-* Create five copies of the image (one for each host)
+### Create five copies of the image (one for each host)
 
 ```
       sudo cp ${A_IMAGE}.qcow2 /var/lib/libvirt/images/atomic-master.qcow2
@@ -115,7 +115,7 @@ Based on which image you downloaded, we need to set an environment variable of t
       sudo cp ${A_IMAGE}.qcow2 /var/lib/libvirt/images/atomic-host-04.qcow2
 ```
 
-* Install the images (adjust BRIDGE appropriately)
+### Install the images (adjust BRIDGE appropriately)
 
 ```
       BRIDGE=virbr0
@@ -142,13 +142,17 @@ Based on which image you downloaded, we need to set an environment variable of t
 
 ## Deployment Option: VirtualBox Environment Setup
 
-* Create paths to separate host data
+### Create VM Data Paths
+
+Create paths to separate host data
 
 ```
       mkdir atomic-master atomic-host-{01,02,03,04}
 ```
 
-* Install the Atomic cloud-init ISO image
+### Install ISO images
+
+Install the Atomic cloud-init ISO image
 
 ```
       mv atomic-master-cidata.iso atomic-master/
@@ -158,7 +162,9 @@ Based on which image you downloaded, we need to set an environment variable of t
       mv atomic-host-04-cidata.iso atomic-host-04/
 ```
 
-* Convert the qcow2 image to vdi for VirtualBox usages
+### Convert VM images
+
+Convert the qcow2 image to vdi for VirtualBox usages
 
 ```
       qemu-img convert -O vdi \
@@ -166,13 +172,17 @@ Based on which image you downloaded, we need to set an environment variable of t
         ${A_IMAGE}.vdi
 ```
 
-* Create a NAT network and configure it
+### Create Network
+
+Create a NAT network and configure it
 
 ```
       VBoxManage natnetwork add --netname "vboxnat0" --network 192.168.122.0/24 --enable --dhcp on
 ```
 
-* Create five VMs and attach the appropriate images (adjust BRIDGE appropriately)
+### Create VMs
+
+Create five VMs and attach the appropriate images (adjust BRIDGE appropriately)
 
 ```
       BRIDGE=en0
