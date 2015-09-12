@@ -56,7 +56,9 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
     wget https://people.redhat.com/jpreston/atomic-training/atomic-host-04-cidata.iso
 ```
 
-* Grab the Fedora Cloud Atomic image
+* Grab the Cloud Atomic image
+
+** For Fedora Cloud Atomic
 
 ```
     wget https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2
