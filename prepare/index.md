@@ -58,19 +58,21 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 * Grab the Cloud Atomic image
 
-** For Fedora Cloud Atomic
+We want to download the appropriate cloud image.
+
+For Fedora Cloud Atomic
 
 ```
     wget https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2
 ```
 
-** For CentOS Cloud Atomic
+For CentOS Cloud Atomic
 
 ```
     wget http://cloud.centos.org/centos/7/atomic/images/CentOS-Atomic-Host-7.1.2-GenericCloud.qcow2
 ```
 
-** For Red Hat Enterprise Linux Atomic Host
+For Red Hat Enterprise Linux Atomic Host
 
 You'll need an active subscription to download from [access.redhat.com](https://access.redhat.com/downloads/content/271/ver=/rhel---7/7.1.4/x86_64/product-downloads)
 
