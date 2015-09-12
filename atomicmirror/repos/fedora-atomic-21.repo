@@ -1,0 +1,3 @@
+OSTREE_GPG_VERIFY=false
+OSTREE_ORIGIN_URL=http://dl.fedoraproject.org/pub/fedora/linux/atomic/21/
+OSTREE_ORIGIN_REF=--mirror

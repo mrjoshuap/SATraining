@@ -1,0 +1,3 @@
+OSTREE_GPG_VERIFY=false
+OSTREE_ORIGIN_URL=http://mirror.centos.org/centos/7/atomic/x86_64/repo/
+OSTREE_ORIGIN_REF=centos-atomic-host/7/x86_64/standard
