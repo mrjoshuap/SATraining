@@ -60,7 +60,7 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 We want to download the appropriate cloud image.
 
-#### Fedora Cloud Atomic
+#### Fedora Cloud Atomic (preferred)
 
 ```
     wget https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2
@@ -81,7 +81,7 @@ You'll need an active subscription to download from [access.redhat.com](https://
 Based on which image you downloaded, we need to set an environment variable of the filename without extension.
 
 ```
-    # For Fedora-Cloud
+    # For Fedora-Cloud (preferred)
     A_IMAGE=Fedora-Cloud-Atomic-22-20150521.x86_64
 
     # For CentOS 7 Atomic
@@ -242,7 +242,7 @@ Now you should have five atomic hosts:
 
 Power them on, validate the host names and make sure you can login using the following credentials:
 
-For Fedora Atomic:
+For Fedora Atomic (preferred):
 
 * Username: ```fedora```
 * Password: ```atomic```
