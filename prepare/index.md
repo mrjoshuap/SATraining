@@ -88,7 +88,7 @@ Based on which image you downloaded, we need to set an environment variable of t
     A_IMAGE=CentOS-Atomic-Host-7.1.2-GenericCloud
 
     # For RHEL 7 Atomic
-    A_IMAGE=rhel-atomic-cloud-7.1-1.x86_64
+    A_IMAGE=rhel-atomic-cloud-7.1-12.x86_64
 
     export A_IMAGE
 ```
