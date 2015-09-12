@@ -29,8 +29,9 @@ Before the training begins, please plan on creating the necessary Virtual Machin
 
 ### Notes, Comments and Pointers
 
+* It is assumed that you will be utilizing Fedora Cloud Atomic
 * Use sudo and appropriate permissions; insert standard security warnings here
-* Correct paths and locations to match your setup
+* Correct IPs, hostnames, paths and locations to match your setup
 * You will need to change the bridge device and/or adapter to match your setup
 
 ## Downloads
