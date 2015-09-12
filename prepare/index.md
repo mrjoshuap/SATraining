@@ -78,6 +78,8 @@ You'll need an active subscription to download from [access.redhat.com](https://
 
 ## Set the appropriate image
 
+Based on which image you downloaded, we need to set an environment variable of the filename without extension.
+
 ```
     # For Fedora-Cloud
     A_IMAGE=Fedora-Cloud-Atomic-22-20150521.x86_64
