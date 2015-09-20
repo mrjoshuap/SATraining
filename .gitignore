@@ -8,3 +8,5 @@
 prepare/index.html
 # Ignore log files
 *.log
+*.odp
+*.pdf
