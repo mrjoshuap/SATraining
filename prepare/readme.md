@@ -10,6 +10,10 @@ _Please be advised that this training may require Internet access for things suc
 
 The purpose of this training to to quickly demonstrate an application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with atomic update and rollback for application and host alike.
 
+We're going to be building 5 systems, one master and four hosts.
+
+![Infrastructure Overview](diagrams.png "Infrastructure Overview")
+
 ### Class 1: Introduction to Project Atomic
 
 Learn what it is, who provides it, where it can be installed, how it is managed, and why modern infrastructures need it.  Includes a basic hands on lab to performing tasks such as installation, updating the OS, rolling back / reverting changes, as well as basic navigation and security concepts.
