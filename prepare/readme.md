@@ -12,7 +12,7 @@ The purpose of this training to to quickly demonstrate an application-centric IT
 
 We're going to be building 5 systems, one master and four hosts.
 
-![Infrastructure Overview](diagrams.png "Infrastructure Overview")
+![Infrastructure Overview](infrastructure-diagram.png "Infrastructure Overview")
 
 ### Class 1: Introduction to Project Atomic
 
