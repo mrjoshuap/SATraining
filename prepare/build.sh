@@ -9,8 +9,4 @@ type -a genisoimage >/dev/null 2>&1 && mkdir -p iso log && for A_HOST in atomic-
 done
 
 # Generate our index file from the readme.md
-type -a markdown >/dev/null 2>&1 && {
-  cat header.html
-  markdown --html4tags readme.md
-  cat footer.html
-} > index.html
+type -a flavor >/dev/null 2>&1 && flavor readme.md > index.html
