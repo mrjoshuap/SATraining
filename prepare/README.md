@@ -1,12 +1,42 @@
 # Project Atomic Training
 
+<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
+
+- [Overview](#overview)
+  - [Class 1 Introduction to Project Atomic](#class-1-introduction-to-project-atomic)
+  - [Class 2: Advanced Project Atomic](#class-2-advanced-project-atomic)
+- [Before You Arrive](#before-you-arrive)
+  - [Notes, Comments and Pointers](#notes-comments-and-pointers)
+  - [Downloads](#downloads)
+  - [Download Required Softwares](#download-required-softwares)
+    - [Grab the ```cloud-init``` images](#grab-the-cloud-init-images)
+    - [Grab the Cloud Atomic image](#grab-the-cloud-atomic-image)
+      - [Fedora Cloud Atomic (preferred)](#fedora-cloud-atomic-preferred)
+      - [CentOS Cloud Atomic](#centos-cloud-atomic)
+      - [Red Hat Enterprise Linux Atomic Host](#red-hat-enterprise-linux-atomic-host)
+  - [Set the appropriate image](#set-the-appropriate-image)
+  - [Preferred Deployment Option: KVM Environment Setup](#preferred-deployment-option-kvm-environment-setup)
+    - [Install the Atomic ```cloud-init``` images](#install-the-atomic-cloud-init-images)
+    - [Create five copies of the image (one for each host)](#create-five-copies-of-the-image-one-for-each-host)
+    - [Install the images (adjust BRIDGE appropriately)](#install-the-images-adjust-bridge-appropriately)
+  - [Deployment Option: VirtualBox Environment Setup](#deployment-option-virtualbox-environment-setup)
+    - [Create VM Data Paths](#create-vm-data-paths)
+    - [Install ISO images](#install-iso-images)
+    - [Convert VM images](#convert-vm-images)
+    - [Create Network](#create-network)
+    - [Create VMs](#create-vms)
+  - [Verify the Atomic Hosts](#verify-the-atomic-hosts)
+  - [References](#references)
+
+<!-- /MarkdownTOC -->
+
+## Overview
+
 When: October 2-3, 2015
 
 Where: Ohio LinuxFest Institute / Columbus, OH
 
 _Please be advised that this training may require Internet access for things such as downloading updates and Docker images._
-
-## Overview
 
 The purpose of this training to to quickly demonstrate an application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with atomic update and rollback for application and host alike.
 
@@ -14,7 +44,7 @@ We're going to be building 5 systems, one master and four hosts.
 
 ![Infrastructure Overview](infrastructure-diagram.png "Infrastructure Overview")
 
-### Class 1: Introduction to Project Atomic
+### Class 1 Introduction to Project Atomic
 
 Learn what it is, who provides it, where it can be installed, how it is managed, and why modern infrastructures need it.  Includes a basic hands on lab to performing tasks such as installation, updating the OS, rolling back / reverting changes, as well as basic navigation and security concepts.
 
