@@ -24,13 +24,13 @@ The purpose of this training to to quickly demonstrate an application-centric IT
 
 We're going to be building 5 systems, one master and four hosts.  These directions will produce the following systems:
 
-| hostname       | ip             | roles                                                                    |
-|----------------|----------------|--------------------------------------------------------------------------|
-| atomic-master  | 192.168.122.10 | etcd & flanneld & kubernetes masters, docker registry, ostree repository |
-| atomic-host-01 | 192.168.122.11 | atomic container host                                                    |
-| atomic-host-02 | 192.168.122.12 | atomic container host                                                    |
-| atomic-host-03 | 192.168.122.13 | atomic container host                                                    |
-| atomic-host-04 | 192.168.122.14 | atomic container host                                                    |
+| hostname       | ip             | roles                                              |
+|----------------|----------------|----------------------------------------------------|
+| atomic-master  | 192.168.122.10 | cluster master, docker registry, ostree repository |
+| atomic-host-01 | 192.168.122.11 | atomic container host                              |
+| atomic-host-02 | 192.168.122.12 | atomic container host                              |
+| atomic-host-03 | 192.168.122.13 | atomic container host                              |
+| atomic-host-04 | 192.168.122.14 | atomic container host                              |
 
 ![Infrastructure Overview](infrastructure-diagram.png "Infrastructure Overview")
 
