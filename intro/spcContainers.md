@@ -2,7 +2,7 @@
 
 The goal here is to explore some of the images that we will be distributing for Atomic. We are trying to keep the Atomic image as small as possible where it makes sense. This means that anything else that gets added to the Atomic Host will have to be inside a container. The examples we will go over in this section are rhel-tools, rsyslog, and sadc. For this to work, you need at least two functioning Atomic Hosts (which will be referred to as node 1 and node 2).
 
-###Using rhel-tools
+### Using rhel-tools
 
 As we saw in the previous labs, the rhel-tools container provides the core system administrator and core developer tools to execute tasks on Red Hat Enterprise Linux 7 Atomic Host. The tools container leverages the atomic command for installation, activation and management.
 
