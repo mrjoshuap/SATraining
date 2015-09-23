@@ -20,7 +20,7 @@ In order to make best use of lab time, please review the deployment options and 
 1. A working KVM environment (preferred)
 1. A working Virtual Box environment
 
-Before the training begins, please plan on creating the necessary Virtual Machines that will be used for this class as described in this document.  Minimal time will be allocated during the training to complete these steps.
+Minimal time will be allocated during the training to complete these steps.
 
 ### Notes, Comments and Pointers
 
