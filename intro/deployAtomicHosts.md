@@ -14,7 +14,6 @@
   - [Create Network](#create-network)
   - [Create VMs](#create-vms)
 - [Verify the Atomic Hosts](#verify-the-atomic-hosts)
-- [Explore the environment](#explore-the-environment)
 
 <!-- /MarkdownTOC -->
 
@@ -205,26 +204,6 @@ For RHEL Atomic:
 
 You might also want to record IPs to make your life easier.
 
-## Explore the environment
-
-What can you do?  What can't you do?  You may see a lot of "Command not found" messages...  We'll explain how to get around that with the rhel-tools container in a later lab.
-
-Type the following commands.  
-
-```
-man tcpdump
-
-git
-
-tcpdump
-
-sosreport
-```
-
-Why wouldn't we include these commands in the Atomic image?
-
-If you want to add something to Atomic Host, you must build a container.
-
-*This concludes the deploying Atomic lab.*
+*This concludes the Deploying Atomic Hosts lab.*
 
 [NEXT LAB](configureStorage.md)

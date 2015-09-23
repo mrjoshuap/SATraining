@@ -8,7 +8,6 @@
 - [*Download images**](#download-images)
 - [*Use bind mounts**](#use-bind-mounts)
   - [onfiguration Merging](#onfiguration-merging)
-  - [NEXT LAB](#next-lab)
 
 <!-- /MarkdownTOC -->
 
@@ -158,4 +157,6 @@ ls: cannot access /usr/etc/some*: No such file or directory
 /etc/somefile
 ```
 
-## [NEXT LAB](spcContainers.md)
+*This concludes the Configure Storage lab.*
+
+[NEXT LAB](manageAtomicHosts.md)

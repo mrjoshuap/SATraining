@@ -563,7 +563,6 @@ Apache is Working
 
 
 
+*This concludes the Super Privileged Containers lab.*
 
-
-
-## [NEXT LAB](configFlannel.md)
+[NEXT LAB](installTools.md)

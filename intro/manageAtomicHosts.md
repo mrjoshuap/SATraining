@@ -8,6 +8,7 @@
   - [CentOS Atomic](#centos-atomic)
   - [Red Hat Enterprise Linux Atomic Host](#red-hat-enterprise-linux-atomic-host)
 - [Update Atomic Hosts](#update-atomic-hosts)
+- [Explore the environment](#explore-the-environment)
 
 <!-- /MarkdownTOC -->
 
@@ -111,3 +112,27 @@ Upgrade prepared for next boot; run "systemctl reboot" to start a reboot
   2015-02-17 22:30:38     7.1.244     27baa6dee2     rhel-atomic-host     rhel-atomic-host-ostree:rhel-atomic-host/7/x86_64/standard     
 
 ```
+
+## Explore the environment
+
+What can you do?  What can't you do?  You may see a lot of "Command not found" messages...  We'll explain how to get around that with the rhel-tools container in a later lab.
+
+Type the following commands.  
+
+```
+man tcpdump
+
+git
+
+tcpdump
+
+sosreport
+```
+
+Why wouldn't we include these commands in the Atomic image?
+
+If you want to add something to Atomic Host, you must build a container.
+
+*This concludes the Manage Atomic Hosts lab.*
+
+[NEXT LAB](svcContainers.md)

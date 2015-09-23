@@ -46,3 +46,5 @@ man tcpdump
 ```
 
 rhel-tools is a Super Privileged Container, which will be covered in the next presentation and lab.
+
+*This concludes the Install Tools lab.*

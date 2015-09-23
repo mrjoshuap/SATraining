@@ -4,3 +4,7 @@
 
 <!-- /MarkdownTOC -->
 
+
+*This concludes the Service Containers lab.*
+
+[NEXT LAB](spcContainers.md)
