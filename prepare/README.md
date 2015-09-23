@@ -5,13 +5,11 @@
 - [Before You Arrive](#before-you-arrive)
   - [Notes, Comments and Pointers](#notes-comments-and-pointers)
   - [Downloads](#downloads)
-  - [Download Required Softwares](#download-required-softwares)
     - [Grab the ```cloud-init``` images](#grab-the-cloud-init-images)
     - [Grab the Cloud Atomic image](#grab-the-cloud-atomic-image)
       - [Fedora Cloud Atomic (preferred)](#fedora-cloud-atomic-preferred)
       - [CentOS Cloud Atomic](#centos-cloud-atomic)
       - [Red Hat Enterprise Linux Atomic Host](#red-hat-enterprise-linux-atomic-host)
-  - [References](#references)
 
 <!-- /MarkdownTOC -->
 
@@ -40,8 +38,6 @@ We are going to be working with the Fedora Cloud Atomic image, however, this tra
 1. [Red Hat Enterprise Linux Atomic Host](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
 
 The ```cloud-init``` images provided are basic and are not intended for use in a real world environment.  Though not covered in this training, you should choose to [customize the ```cloud-init``` image](http://cloudinit.readthedocs.org/en/latest/topics/examples.html) for instance: adding your own SSH public keys, changing the default password and setting other options as necessary.
-
-## Download Required Softwares
 
 ### Grab the ```cloud-init``` images
 
@@ -74,12 +70,3 @@ wget http://cloud.centos.org/centos/7/atomic/images/CentOS-Atomic-Host-7.1.2-Gen
 You'll need an active subscription to download from [access.redhat.com](https://access.redhat.com/downloads/content/271/ver=/rhel---7/7.1.4/x86_64/product-downloads)
 
 Now, wait until the class, you may want to run through some reference materials!
-
-## References
-
-1. [Project Atomic](http://www.projectatomic.io/)
-1. [Docker](https://www.docker.io/)
-1. [Kubernetes](http://kubernetes.io/)
-1. [rpm-ostree](http://www.projectatomic.io/docs/os-updates/)
-1. [systemd](http://www.freedesktop.org/wiki/Software/systemd/)
-1. [cloud-init](https://cloudinit.readthedocs.org/en/latest/)
