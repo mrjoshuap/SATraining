@@ -40,7 +40,16 @@ _Please be advised that this training may require Internet access for things suc
 
 The purpose of this training to to quickly demonstrate an application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with atomic update and rollback for application and host alike.
 
-We're going to be building 5 systems, one master and four hosts.
+We're going to be building 5 systems, one master and four hosts.  These directions will produce the following systems:
+
+| hostname       | ip             | roles                                                                    |
+|----------------|----------------|--------------------------------------------------------------------------|
+| atomic-master  | 192.168.122.10 | etcd & flanneld & kubernetes masters, docker registry, ostree repository |
+| atomic-host-01 | 192.168.122.11 | atomic container host                                                    |
+| atomic-host-02 | 192.168.122.12 | atomic container host                                                    |
+| atomic-host-03 | 192.168.122.13 | atomic container host                                                    |
+| atomic-host-04 | 192.168.122.14 | atomic container host                                                    |
+
 
 ![Infrastructure Overview](infrastructure-diagram.png "Infrastructure Overview")
 
@@ -155,10 +164,10 @@ sudo cp ${A_IMAGE}.qcow2 /var/lib/libvirt/images/atomic-host-04.qcow2
 BRIDGE=virbr0
 LAST_OCTET=10
 for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host-04; do
-  test -f /var/lib/libvirt/images/${VM}-docker.qcow2 \
-    && rm -f /var/lib/libvirt/images/${VM}-docker.qcow2
-  chown qemu:qemu /var/lib/libvirt/images/${VM}*
-  virt-install --import --name "${VM}" \
+  sudo test -f /var/lib/libvirt/images/${VM}-docker.qcow2 \
+    && sudo rm -f /var/lib/libvirt/images/${VM}-docker.qcow2
+  sudo chown qemu:qemu "/var/lib/libvirt/images/${VM}*"
+  sudo virt-install --import --name "${VM}" \
     --os-variant fedora21 \
     --ram 1024 --vcpus 2 \
     --disk path=/var/lib/libvirt/images/${VM}.qcow2,format=qcow2,bus=virtio \
@@ -166,8 +175,8 @@ for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host
     --disk path=/var/lib/libvirt/images/${VM}-cidata.iso,device=cdrom \
     --network bridge=${BRIDGE} --force \
     --noautoconsole
-  A_MAC=$(virsh domiflist ${VM} | tail -n 2 | head -n 1 | awk '{print $5}')
-  virsh net-update default add ip-dhcp-host \
+  A_MAC=$(sudo virsh domiflist ${VM} | tail -n 2 | head -n 1 | awk '{print $5}')
+  sudo virsh net-update default add ip-dhcp-host \
     "<host mac='${A_MAC}' name='${VM}' ip='192.168.122.${LAST_OCTET}' />" \
     --live --config
     LAST_OCTET=$((${LAST_OCTET}+1))
