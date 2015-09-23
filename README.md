@@ -5,7 +5,7 @@
 - [Overview](#overview)
 - [Agenda](#agenda)
   - [Preparation](#preparation)
-  - [Class 1 Introduction to Project Atomic](#class-1-introduction-to-project-atomic)
+  - [Class 1: Introduction to Project Atomic](#class-1-introduction-to-project-atomic)
   - [Class 2: Advanced Project Atomic](#class-2-advanced-project-atomic)
 - [References](#references)
 - [Downloads](#downloads)
@@ -45,12 +45,13 @@ Things you should do to prepare for training to maximize your lab time.
 
 1. [Prepare](prepare/README.md)
 
-### Class 1 Introduction to Project Atomic
+### Class 1: Introduction to Project Atomic
 
 Learn what it is, who provides it, where it can be installed, how it is managed, and why modern infrastructures need it.  Includes a basic hands on lab to performing tasks such as installation, updating the OS, rolling back / reverting changes, as well as basic navigation and security concepts.
 
 1. [Deploy Atomic Hosts](intro/deployAtomicHosts.md)
 1. [Configure Storage](intro/configureStorage.md)
+1. [Manage Atomic Hosts](intro/manageAtomicHosts.md)
 1. [Service Containers](intro/svcContainers.md)
 1. [Super Privileged Containers](intro/spcContainers.md)
 1. [Install Tools](intro/installTools.md)
