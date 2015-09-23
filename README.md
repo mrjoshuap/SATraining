@@ -14,8 +14,6 @@
 
 ## Overview
 
-The purpose of this training to to quickly demonstrate an application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with atomic update and rollback for application and host alike.
-
 When: October 2-3, 2015
 
 Where: Ohio LinuxFest Institute / Columbus, OH
@@ -33,7 +31,6 @@ We're going to be building 5 systems, one master and four hosts.  These directio
 | atomic-host-02 | 192.168.122.12 | atomic container host                                                    |
 | atomic-host-03 | 192.168.122.13 | atomic container host                                                    |
 | atomic-host-04 | 192.168.122.14 | atomic container host                                                    |
-
 
 ![Infrastructure Overview](infrastructure-diagram.png "Infrastructure Overview")
 
