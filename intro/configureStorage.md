@@ -1,3 +1,17 @@
+# Configure Storage
+
+<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
+
+- [*BEFORE YOU ARRIVE**](#before-you-arrive)
+  - [*Agenda / High Level Overview:**](#agenda--high-level-overview)
+- [*Inspect the system**](#inspect-the-system)
+- [*Download images**](#download-images)
+- [*Use bind mounts**](#use-bind-mounts)
+  - [onfiguration Merging](#onfiguration-merging)
+  - [NEXT LAB](#next-lab)
+
+<!-- /MarkdownTOC -->
+
 ##**BEFORE YOU ARRIVE**
     In order to make best use of the lab time, please ensure you have:
 

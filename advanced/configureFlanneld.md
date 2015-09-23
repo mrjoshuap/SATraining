@@ -1,5 +1,15 @@
 #**Configure Flannel**
 
+<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
+
+- [est the flannel configuration](#est-the-flannel-configuration)
+- [*Troubleshooting**](#troubleshooting)
+  - [Restarting services](#restarting-services)
+  - [Networking](#networking)
+- [NEXT LAB](#next-lab)
+
+<!-- /MarkdownTOC -->
+
 * Check and explore the versions of software you have.  This should be the same on all nodes.
 
 ```

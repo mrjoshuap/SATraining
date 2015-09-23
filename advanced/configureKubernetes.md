@@ -1,4 +1,15 @@
-##Configure Kubernetes##
+# Configure Kubernetes
+
+<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
+
+- [repare the hosts](#repare-the-hosts)
+    - [onfigure the kubernetes services on the master](#onfigure-the-kubernetes-services-on-the-master)
+    - [onfigure the kubernetes services on the nodes](#onfigure-the-kubernetes-services-on-the-nodes)
+- [eploy an application##](#eploy-an-application)
+- [Create a service to make the pod discoverable ##](#create-a-service-to-make-the-pod-discoverable-)
+- [Create a replication controller to control the pod ##](#create-a-replication-controller-to-control-the-pod-)
+
+<!-- /MarkdownTOC -->
 
 The kubernetes package provides several services
 

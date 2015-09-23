@@ -51,19 +51,19 @@ Learn what it is, who provides it, where it can be installed, how it is managed,
 
 1. [Deploy Atomic Hosts](intro/deployAtomicHosts.md)
 1. [Configure Storage](intro/configureStorage.md)
-1. [Install Atomic Tools](intro/installAtomicTools.md)
+1. [Service Containers](intro/svcContainers.md)
+1. [Super Privileged Containers](intro/spcContainers.md)
+1. [Install Tools](intro/installTools.md)
 
 ### Class 2: Advanced Project Atomic
 
 Learn to differentiate between Service Containers (Apache, Tomcat, DNS, etc.) and Super Privileged Containers (tools, logging, performance, etc).  Includes a more advanced hands on lab demonstrating how to install, manage and orchestrate containers on the Atomic platform.
 
 1. [Configure Atomic Master](intro/configureAtomicMaster.md)
-1. [Configure etcd](advanced/configFlannel.md)
-1. [Configure flanneld](advanced/configFlannel.md)
-1. [Configure kubernetes](advanced/configKubernetes.md)
-1. [Configure Atomic Hosts](advanced/configAtomicHosts.md)
-1. [Service Containers](advanced/svcContainers.md)
-1. [Super Privileged Containers](advanced/spcContainers.md)
+1. [Configure flanneld](advanced/configureFlanneld.md)
+1. [Configure kubernetes](advanced/configureKubernetes.md)
+1. [Configure Atomic Hosts](advanced/configureAtomicHosts.md)
+1. [Deploy Applications](deployApplications.md)
 
 ## References
 
