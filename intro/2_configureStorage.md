@@ -301,12 +301,20 @@ stupefied_bell
 
 # Bind Mounts
 
+Let's check our disk space of our host's root filesystem:
+
+```
+# df -h /
+Filesystem                 Size  Used Avail Use% Mounted on
+/dev/mapper/atomicos-root  3.0G  817M  2.2G  28% /
+```
+
 Create host directory, label it, use a bind mount to write 50MB of data *outside* the container
 
 ```
-# mkdir -p /var/local/containerdata
-# chcon -R -h -t svirt_sandbox_file_t /var/local/containerdata/
-# docker run --rm -v /var/local/containerdata:/var/tmp registry.access.redhat.com/rhel7 dd if=/dev/zero of=/var/tmp/data count=100000
+# sudo mkdir -p /var/local/containerdata
+# sudo chcon -R -h -t svirt_sandbox_file_t /var/local/containerdata/
+# sudo docker run --rm -v /var/local/containerdata:/var/tmp docker.io/fedora/tools dd if=/dev/zero of=/var/tmp/data count=100000
 100000+0 records in
 100000+0 records out
 51200000 bytes (51 MB) copied, 0.0865377 s, 592 MB/s
@@ -323,6 +331,21 @@ drwxr-xr-x. 3 root root       26 Feb 27 20:39 ..
 ```
 
 The disk usage shown by `df -h` on the host will have increased, even after deleting the container.
+
+```
+# df -h /
+Filesystem                 Size  Used Avail Use% Mounted on
+/dev/mapper/atomicos-root  3.0G  865M  2.1G  29% /
+```
+
+Now, let's delete the data and check disk usage:
+
+```
+# sudo rm /var/local/containerdata/data
+# df -h /
+Filesystem                 Size  Used Avail Use% Mounted on
+/dev/mapper/atomicos-root  3.0G  817M  2.2G  28% /
+```
 
 *This concludes the Configure Storage lab.*
 
