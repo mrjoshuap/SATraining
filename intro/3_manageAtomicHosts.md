@@ -23,7 +23,7 @@
 
 ### Begin
 
-_NOTE: We will be working on only the `atomic-master`._
+_NOTE: We will be working only on the `atomic-master`._
 
 * Login to the `atomic-master`
 

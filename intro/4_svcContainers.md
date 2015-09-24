@@ -2,14 +2,18 @@
 
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
-- [Begin](#begin)
+- [Agenda](#agenda)
+  - [Begin](#begin)
 
 <!-- /MarkdownTOC -->
 
-## Begin
+## Agenda
 
-_NOTE: We will be working on only the `atomic-master`._
+### Begin
 
+_NOTE: We will be working only on the `atomic-master`._
+
+* Login to the `atomic-master`
 
 *This concludes the Service Containers lab.*
 

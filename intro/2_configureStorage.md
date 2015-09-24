@@ -35,6 +35,8 @@
 
 ### Begin
 
+_NOTE: We will be working only on the `atomic-master`._
+
 * Login to the `atomic-master`
 
 # Inspect the System

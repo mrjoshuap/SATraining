@@ -20,7 +20,7 @@ In order to make best use of lab time, please review the deployment options and 
 1. A working KVM environment (preferred)
 1. A working Virtual Box environment
 
-Minimal time will be allocated during the training to complete these steps.
+Minimal time will be allocated during the training to get functional lab environments.
 
 ### Notes, Comments and Pointers
 

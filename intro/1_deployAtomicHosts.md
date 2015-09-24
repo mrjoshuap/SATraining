@@ -3,6 +3,7 @@
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
 - [Agenda](#agenda)
+  - [Begin](#begin)
 - [Deployment Option: KVM Environment Setup (preferred)](#deployment-option-kvm-environment-setup-preferred)
   - [Install the Atomic ```cloud-init``` images](#install-the-atomic-cloud-init-images)
   - [Install "gold" VM Image](#install-gold-vm-image)
@@ -28,6 +29,15 @@
 There are many ways to deploy an Atomic Host. In this lab, we provide guidance for KVM and VirtualBox.  We will be utilizing cloud images that are typically used with libvirt (KVM) and OpenStack.
 
 Based on which image you downloaded, we need to set an environment variable of the filename without extension.
+
+### Begin
+
+In order to make best use of lab time, please review the deployment options and ensure you have one of the following:
+
+1. A working KVM environment (preferred)
+1. A working Virtual Box environment
+
+Set the appropriate cloud image you are using:
 
 ```bash
 # For Fedora-Cloud (preferred)
