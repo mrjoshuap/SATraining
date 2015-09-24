@@ -19,7 +19,7 @@
   - [Physical Volumes](#physical-volumes-1)
   - [Volume Groups](#volume-groups-1)
   - [Logical Volumes](#logical-volumes-1)
-  - [Inspect Docker Information](#inspect-docker-information-1)
+  - [Reinspect Docker Information](#reinspect-docker-information)
 - [Download Docker Image](#download-docker-image)
 - [Bind Mounts](#bind-mounts)
 
@@ -32,7 +32,6 @@
 1. Inspect the updated LVM setup
 1. Download images, write inside the container
 1. Use bind mounts, write to bind mount
-1. Configuration merging
 
 ### Begin
 
@@ -198,7 +197,7 @@ NOCHANGE: partition 2 is size 11966464. it cannot be grown
   docker-meta docker   -wi-a----- 12.00m
 ```
 
-## Inspect Docker Information
+## Reinspect Docker Information
 
 ```
 # sudo docker info

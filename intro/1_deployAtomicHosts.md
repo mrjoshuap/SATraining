@@ -2,11 +2,11 @@
 
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
-- [Set the appropriate image](#set-the-appropriate-image)
+- [Agenda](#agenda)
 - [Preferred Deployment Option: KVM Environment Setup](#preferred-deployment-option-kvm-environment-setup)
   - [Install the Atomic ```cloud-init``` images](#install-the-atomic-cloud-init-images)
-  - [Install cloud images](#install-cloud-images)
-  - [Install the images (adjust BRIDGE appropriately)](#install-the-images-adjust-bridge-appropriately)
+  - [Install "gold" VM Image](#install-gold-vm-image)
+  - [Install the VM images (adjust BRIDGE appropriately)](#install-the-vm-images-adjust-bridge-appropriately)
 - [Deployment Option: VirtualBox Environment Setup](#deployment-option-virtualbox-environment-setup)
   - [Create VM Data Paths](#create-vm-data-paths)
   - [Install ISO images](#install-iso-images)
@@ -18,10 +18,14 @@
 
 <!-- /MarkdownTOC -->
 
+## Agenda
 
-There are many ways to deploy an Atomic Host. In this lab, we provide guidance for KVM and VirtualBox.
+1. Create VM for `atomic-master`
+1. Create 4 VMs for `atomic-hosts`
+1. Verify Atomic Hosts
+1. Explore the Environment
 
-## Set the appropriate image
+There are many ways to deploy an Atomic Host. In this lab, we provide guidance for KVM and VirtualBox.  We will be utilizing cloud images that are typically used with libvirt (KVM) and OpenStack.
 
 Based on which image you downloaded, we need to set an environment variable of the filename without extension.
 
@@ -50,7 +54,7 @@ sudo cp atomic-host-03-cidata.iso /var/lib/libvirt/images/
 sudo cp atomic-host-04-cidata.iso /var/lib/libvirt/images/
 ```
 
-### Install cloud images
+### Install "gold" VM Image
 
 Make copy-on-write images, using the downloaded image as a "gold" master.
 
@@ -58,7 +62,7 @@ Make copy-on-write images, using the downloaded image as a "gold" master.
 sudo cp ${A_IMAGE}.qcow2 /var/lib/libvirt/images/.
 ```
 
-### Install the images (adjust BRIDGE appropriately)
+### Install the VM images (adjust BRIDGE appropriately)
 
 ```bash
 BRIDGE=virbr0
