@@ -3,7 +3,7 @@
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
 - [Agenda](#agenda)
-- [Preferred Deployment Option: KVM Environment Setup](#preferred-deployment-option-kvm-environment-setup)
+- [Deployment Option: KVM Environment Setup (preferred)](#deployment-option-kvm-environment-setup-preferred)
   - [Install the Atomic ```cloud-init``` images](#install-the-atomic-cloud-init-images)
   - [Install "gold" VM Image](#install-gold-vm-image)
   - [Install the VM images (adjust BRIDGE appropriately)](#install-the-vm-images-adjust-bridge-appropriately)
@@ -42,7 +42,7 @@ A_IMAGE=rhel-atomic-cloud-7.1-12.x86_64
 export A_IMAGE
 ```
 
-## Preferred Deployment Option: KVM Environment Setup
+## Deployment Option: KVM Environment Setup (preferred)
 
 ### Install the Atomic ```cloud-init``` images
 
