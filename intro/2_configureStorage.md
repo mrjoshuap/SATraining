@@ -15,7 +15,7 @@
   - [Run `docker-storage-setup`](#run-docker-storage-setup)
   - [Physical Volumes](#physical-volumes-1)
   - [Volume Groups](#volume-groups-1)
-  - [Logical Volums](#logical-volums)
+  - [Logical Volumes](#logical-volumes-1)
   - [Start Docker](#start-docker)
   - [Inspect Docker Information](#inspect-docker-information-1)
 - [Download Docker Image](#download-docker-image)
@@ -178,7 +178,7 @@ NOCHANGE: partition 2 is size 11966464. it cannot be grown
   docker     1   2   0 wz--n- 10.00g 208.00m
 ```
 
-## Logical Volums
+## Logical Volumes
 ```
 # sudo lvs
   LV          VG       Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
