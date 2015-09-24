@@ -2,34 +2,44 @@
 
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
-- [*BEFORE YOU ARRIVE**](#before-you-arrive)
-  - [*Agenda / High Level Overview:**](#agenda--high-level-overview)
-- [*Inspect the system**](#inspect-the-system)
-- [*Download images**](#download-images)
-- [*Use bind mounts**](#use-bind-mounts)
-  - [onfiguration Merging](#onfiguration-merging)
+- [Agenda](#agenda)
+- [Inspect the System](#inspect-the-system)
+  - [Physical Volumes](#physical-volumes)
+  - [Volume Groups](#volume-groups)
+  - [Logical Volumes](#logical-volumes)
+- [Configure Docker Storage](#configure-docker-storage)
+  - [Stop Docker](#stop-docker)
+  - [Remove Default Storage](#remove-default-storage)
+  - [Edit /etc/sysconfig/docker-storage-setup](#edit-etcsysconfigdocker-storage-setup)
+- [Download Docker Image](#download-docker-image)
+- [Bind Mounts](#bind-mounts)
+- [Configuration Merging](#configuration-merging)
 
 <!-- /MarkdownTOC -->
 
-##**BEFORE YOU ARRIVE**
-    In order to make best use of the lab time, please ensure you have:
-
-1. A running Atomic Host
-
-##**Agenda / High Level Overview:**
+## Agenda
 
 1. Inspect and understand LVM setup
-2. Download images, write inside the container
-3. Use bind mounts and notice that space goes to the host pool
-4. Configuration merging
+1. Configure docker storage
+1. Download images, write inside the container
+1. Use bind mounts, write to bind mount
+1. Configuration merging
 
-#**Inspect the system**
+# Inspect the System
 
-* Take note of the automatic storage configuration for Docker by
-  looking at the logical volumes. An Atomic Host comes optimized out
-  of the box to take advantage of LVM thinpool storage, instead of
-  the loopback used with Docker by default.
+Take note of the automatic storage configuration for Docker by looking at the physical volumes, volume groups and logical volumes. An Atomic Host comes optimized out of the box to take advantage of LVM thinpool storage, instead of the loopback used with Docker by default.
 
+### Physical Volumes
+```
+# pvs
+```
+
+### Volume Groups
+```
+# vgs
+```
+
+### Logical Volumes
 ```
 # lvs
   LV          VG       Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
@@ -64,8 +74,30 @@ Name: scollier-atomic-ga-kube-test-acaea32f-667a-4a54-aea3-41d1ac573c1
 ID: CNPB:PLKF:34V3:4ESX:Y3KG:XCUV:RYSQ:ZMHN:TFXF:2ENH:AR3V:MO5Q
 ```
 
-#**Download images**
-* Pull a Docker image and notice that the data goes into the pool:
+# Configure Docker Storage
+
+## Stop Docker
+
+```
+systemctl stop docker
+```
+
+## Remove Default Storage
+
+```
+lvremove docker-pool
+```
+
+## Edit /etc/sysconfig/docker-storage-setup
+
+```
+VG=docker
+DEVS=/dev/vdb
+```
+
+# Download Docker Image
+
+Pull a Docker image and notice that the data goes into the pool:
 
 ```
 # docker pull registry.access.redhat.com/rhel7
@@ -94,7 +126,8 @@ Now, remove the stopped container and notice that the space is freed in Docker s
  Data Space Used: 200.3 MB
 ```
 
-#**Use bind mounts**
+# Bind Mounts
+
 * Create host directory, label it, use a bind mount to write 50MB of data *outside* the container
 
 ```
@@ -118,9 +151,9 @@ drwxr-xr-x. 3 root root       26 Feb 27 20:39 ..
 
 The disk usage shown by `df -h` on the host will have increased, even after deleting the container.
 
-##Configuration Merging
+# Configuration Merging
 
-* Explore configuration merging. Execute the following command to look at existing differences:
+Explore configuration merging. Execute the following command to look at existing differences:
 
 ```
 # ostree admin config-diff
