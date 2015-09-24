@@ -320,7 +320,16 @@ Create host directory, label it, use a bind mount to write 50MB of data *outside
 51200000 bytes (51 MB) copied, 0.0865377 s, 592 MB/s
 ```
 
-Notice that we used `--rm`, so the container is automatically deleted after it runs. However, the data exists on the host filesystem:
+Notice that we used `--rm`, so the container is automatically deleted after it runs.
+
+Let's see what containers exist:
+
+```
+# sudo docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+
+The container no longer exists, however, the data exists on the host filesystem:
 
 ```
 # ls -al /var/local/containerdata
@@ -338,10 +347,19 @@ Filesystem                 Size  Used Avail Use% Mounted on
 /dev/mapper/atomicos-root  3.0G  865M  2.1G  29% /
 ```
 
-Now, let's delete the data and check disk usage:
+Now, let's delete the data:
 
 ```
 # sudo rm /var/local/containerdata/data
+# ls -al /var/local/containerdata
+total 0
+drwxr-xr-x. 2 root root  6 Sep 24 18:19 .
+drwxr-xr-x. 3 root root 26 Sep 24 18:18 ..
+```
+
+Now, let's check the disk space usage:
+
+```
 # df -h /
 Filesystem                 Size  Used Avail Use% Mounted on
 /dev/mapper/atomicos-root  3.0G  817M  2.2G  28% /
