@@ -3,6 +3,7 @@
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
 - [Agenda](#agenda)
+  - [Begin](#begin)
 - [Inspect the System](#inspect-the-system)
   - [Physical Volumes](#physical-volumes)
   - [Volume Groups](#volume-groups)
@@ -11,16 +12,16 @@
 - [Configure Docker Storage](#configure-docker-storage)
   - [Stop Docker](#stop-docker)
   - [Remove Default Storage](#remove-default-storage)
-  - [Configure New Docker Storage Device](#configure-new-docker-storage-device)
-  - [Run `docker-storage-setup`](#run-docker-storage-setup)
+  - [Configure Docker Storage Setup](#configure-docker-storage-setup)
+  - [Run Docker Storage Setup](#run-docker-storage-setup)
+  - [Start Docker](#start-docker)
+- [Reinspect the System](#reinspect-the-system)
   - [Physical Volumes](#physical-volumes-1)
   - [Volume Groups](#volume-groups-1)
   - [Logical Volumes](#logical-volumes-1)
-  - [Start Docker](#start-docker)
   - [Inspect Docker Information](#inspect-docker-information-1)
 - [Download Docker Image](#download-docker-image)
 - [Bind Mounts](#bind-mounts)
-- [Configuration Merging](#configuration-merging)
 
 <!-- /MarkdownTOC -->
 
@@ -32,6 +33,10 @@
 1. Download images, write inside the container
 1. Use bind mounts, write to bind mount
 1. Configuration merging
+
+### Begin
+
+* Login to the `atomic-master`
 
 # Inspect the System
 
@@ -110,8 +115,7 @@ Do you really want to remove active logical volume docker-pool? [y/n]: *y*
   Logical volume "docker-pool" successfully removed
 ```
 
-## Configure New Docker Storage Device
-
+## Configure Docker Storage Setup
 
 ```
 # sudo vi /etc/sysconfig/docker-storage-setup
@@ -126,7 +130,7 @@ DEVS=/dev/vdb
 
 _NOTE: Update the device appropriately for your system.  i.e. for VirtualBox, it could be `/dev/sdb`_
 
-## Run `docker-storage-setup`
+## Run Docker Storage Setup
 
 ```
 # sudo docker-storage-setup
@@ -162,6 +166,13 @@ NOCHANGE: partition 2 is size 11966464. it cannot be grown
   Logical volume "docker-data" created.
 ```
 
+## Start Docker
+```
+# sudo systemctl start docker
+```
+
+# Reinspect the System
+
 ## Physical Volumes
 ```
 # sudo pvs
@@ -185,11 +196,6 @@ NOCHANGE: partition 2 is size 11966464. it cannot be grown
   root        atomicos -wi-ao----  2.93g
   docker-data docker   -wi-a-----  9.78g
   docker-meta docker   -wi-a----- 12.00m
-```
-
-## Start Docker
-```
-# sudo systemctl start docker
 ```
 
 ## Inspect Docker Information
@@ -317,45 +323,6 @@ drwxr-xr-x. 3 root root       26 Feb 27 20:39 ..
 ```
 
 The disk usage shown by `df -h` on the host will have increased, even after deleting the container.
-
-# Configuration Merging
-
-Explore configuration merging. Execute the following command to look at existing differences:
-
-```
-# ostree admin config-diff
-M    adjtime
-M    gshadow
-M    hosts
-M    libuser.conf
-M    login.defs
-M    nsswitch.conf
-<snip>
-```
-
-* Create a file in _/etc/_
-
-```
-# touch /etc/somefile
-```
-
-* Ensure ostree is aware of the new file.
-
-
-```
-# ostree admin config-diff | grep somef
-A    somefile
-```
-
-* Compare _/usr/etc_ to _etc_. Notice how _somefile_ is not in _/usr/etc_.
-
-```
-# ls /usr/etc/some*
-ls: cannot access /usr/etc/some*: No such file or directory
-
-# ls /etc/some*
-/etc/somefile
-```
 
 *This concludes the Configure Storage lab.*
 
