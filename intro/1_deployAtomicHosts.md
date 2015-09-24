@@ -69,7 +69,7 @@ for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host
   sudo chown qemu:qemu "/var/lib/libvirt/images/${VM}*"
   sudo qemu-img create -f qcow2 \
     -o backing_file="/var/lib/libvirt/images/${A_IMAGE}.qcow2" \
-    "${VM}.qcow2"
+    "/var/lib/libvirt/images/${VM}.qcow2"
   sudo virt-install --import --name "${VM}" \
     --os-variant fedora21 \
     --ram 1024 --vcpus 2 \
@@ -209,7 +209,7 @@ You might also want to record IPs to make your life easier.
 
 What can you do?  What can't you do?  You may see a lot of "Command not found" messages...  We'll explain how to get around that with the tools container in a later lab.
 
-Type the following commands.  
+Type the following commands.
 
 ```
 man tcpdump
