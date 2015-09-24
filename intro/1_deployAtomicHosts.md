@@ -65,8 +65,13 @@ sudo cp ${A_IMAGE}.qcow2 /var/lib/libvirt/images/.
 ### Install the VM images (adjust BRIDGE appropriately)
 
 ```bash
+# adjust the bridge appropriately
 BRIDGE=virbr0
+
+# this sets the value to start the last octect for each host
 LAST_OCTET=10
+
+# iterate through each of our hosts
 for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host-04; do
 
   # remove previous VM images
@@ -96,12 +101,16 @@ for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host
   sudo virsh net-update default add ip-dhcp-host \
     "<host mac='${A_MAC}' name='${VM}' ip='192.168.122.${LAST_OCTET}' />" \
     --live --config
-    LAST_OCTET=$((${LAST_OCTET}+1))
+
+  # increment the last octect
+  LAST_OCTET=$((${LAST_OCTET}+1))
 
 done
 ```
 
 ## Deployment Option: VirtualBox Environment Setup
+
+_NOTE: setting static IP addresses is beyond the scope of this document.  You will need to record IP addresses of each host manually for use with the rest of the labs._
 
 ### Create VM Data Paths
 
@@ -146,7 +155,10 @@ VBoxManage natnetwork add --netname "vboxnat0" --network 192.168.122.0/24 --enab
 Create five VMs and attach the appropriate images (adjust BRIDGE appropriately)
 
 ```
+# adjust the bridge appropriately
 BRIDGE=en0
+
+# iterate through each of our hosts
 for VM in atomic-master atomic-host-01 atomic-host-02 atomic-host-03 atomic-host-04; do
 
   # Copy the cloud image to a unique disk image for each host
