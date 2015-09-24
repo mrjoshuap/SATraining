@@ -14,10 +14,6 @@
 
 ## Overview
 
-When: October 2-3, 2015
-
-Where: Ohio LinuxFest Institute / Columbus, OH
-
 _Please be advised that this training may require Internet access for things such as downloading updates and Docker images._
 
 The purpose of this training to to quickly demonstrate an application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with atomic update and rollback for application and host alike.
