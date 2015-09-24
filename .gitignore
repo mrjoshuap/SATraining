@@ -10,3 +10,5 @@ prepare/index.html
 *.log
 *.odp
 *.pdf
+*.sublime-project
+*.sublime-workspace
