@@ -223,37 +223,74 @@ ID: NOJA:746G:NAE4:VET4:5ARY:BIY4:EAWA:4ORJ:ZMEZ:MSG6:DEX7:YW65
 
 # Download Docker Image
 
-Pull a Docker image and notice that the data goes into the pool:
+Let's see how much data space Docker currently uses:
 
 ```
-TODO: choose a different image
-# docker pull registry.access.redhat.com/rhel7
-# docker info |grep 'Data Space Used'
- Data Space Used: 177 MB
+# sudo docker info | grep 'Data Space Used'
+ Data Space Used: 11.8 MB
+```
+
+Now, let's pull a Docker image and notice that the data goes into the pool:
+
+```
+# sudo docker pull docker.io/fedora/tools
+latest: Pulling from docker.io/fedora/tools
+48ecf305d2cf: Pull complete
+ded7cd95e059: Pull complete
+faa89fffe7d7: Pull complete
+4ea26db2f85c: Pull complete
+74fc05742791: Pull complete
+d26be909cb61: Pull complete
+1b077fbc313d: Pull complete
+4022e4badd41: Pull complete
+150b28944563: Pull complete
+Digest: sha256:1112bba64266ad6229a9940039e99f93435e622262b1d07830292fcc046a13dc
+Status: Downloaded newer image for docker.io/fedora/tools:latest
+```
+
+View how much data space Docker now uses:
+
+```
+# sudo docker info | grep 'Data Space Used'
+ Data Space Used: 1.503 GB
 ```
 
 Create a new container, writing 50MB of data *inside* the container. Note the container persists.
 
 ```
-TODO: choose a different image
-# docker run registry.access.redhat.com/rhel7 dd if=/dev/zero of=/var/tmp/data count=100000
+# sudo docker run docker.io/fedora/tools dd if=/dev/zero of=/var/tmp/data count=100000
 100000+0 records in
 100000+0 records out
 51200000 bytes (51 MB) copied, 0.0789428 s, 649 MB/s
-# docker ps -a
-TODO: Update with appropriate output
-CONTAINER ID        IMAGE                                COMMAND                CREATED             STATUS                      PORTS               NAMES
-6d645085a215        registry.access.redhat.com/rhel7:0   "dd if=/dev/zero of=   5 seconds ago      Exited (0) 4 seconds ago                       prickly_stallman
-# docker info | grep 'Data Space Used'
-  Data Space Used: 234.2 MB
 ```
 
-Now, remove the stopped container and notice that the space is freed in Docker storage:
+Now, let's see the status of our containers:
 
 ```
-# docker rm <rhel7_container_id_or_name>
-# docker info |grep 'Data Space Used'
- Data Space Used: 200.3 MB
+# sudo docker ps -a
+CONTAINER ID        IMAGE                           COMMAND                CREATED              STATUS                          PORTS               NAMES
+f562d2b5829a        docker.io/fedora/tools:latest   "dd if=/dev/zero of=   About a minute ago   Exited (0) About a minute ago                       stupefied_bell
+```
+
+Let's see how much storage we use now:
+
+```
+# sudo docker info | grep 'Data Space Used'
+ Data Space Used: 1.561 GB
+```
+
+Notice how we have approximately 50MB more data space used?
+
+Remove the stopped container and notice that the space is freed in Docker storage:
+
+```
+# sudo docker rm stupefied_bell
+stupefied_bell
+```
+
+```
+# sudo docker info |grep 'Data Space Used'
+ Data Space Used: 1.503 GB
 ```
 
 # Bind Mounts
