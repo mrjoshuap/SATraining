@@ -7,4 +7,4 @@
 
 *This concludes the Service Containers lab.*
 
-[NEXT LAB](spcContainers.md)
+[NEXT LAB](5_spcContainers.md)

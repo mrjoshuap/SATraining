@@ -32,3 +32,7 @@ systemctl restart docker
 ## Configure Local ostree Repository
 
 For this lab, we want to ensure we are getting our updates from a local repository for performance and network purposes.
+
+*This concludes the Configure Atomic Hosts lab.*
+
+[NEXT LAB](5_deployApplications.md)

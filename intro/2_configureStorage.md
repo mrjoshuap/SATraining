@@ -11,6 +11,7 @@
   - [Stop Docker](#stop-docker)
   - [Remove Default Storage](#remove-default-storage)
   - [Edit /etc/sysconfig/docker-storage-setup](#edit-etcsysconfigdocker-storage-setup)
+  - [Run `docker-storage-setup`](#run-docker-storage-setup)
 - [Download Docker Image](#download-docker-image)
 - [Bind Mounts](#bind-mounts)
 - [Configuration Merging](#configuration-merging)
@@ -32,46 +33,26 @@ Take note of the automatic storage configuration for Docker by looking at the ph
 ### Physical Volumes
 ```
 # pvs
+TODO: Update with appropriate output
 ```
 
 ### Volume Groups
 ```
 # vgs
+TODO: Update with appropriate output
 ```
 
 ### Logical Volumes
 ```
 # lvs
-  LV          VG       Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
-  docker-pool atomicos twi-aotz-- 16.38g             0.07   0.32                            
-  root        atomicos -wi-ao----  2.94g 
+TODO: Update with appropriate output
 ```
 
 * Now see how that corresponds to the Docker image and container storage:
 
 ```
 # docker info
-Containers: 0
-Images: 0
-Storage Driver: devicemapper
- Pool Name: atomicos-docker--pool
- Pool Blocksize: 65.54 kB
- Backing Filesystem: <unknown>
- Data file:
- Metadata file:
- Data Space Used: 11.8 MB
- Data Space Total: 17.95 GB
- Metadata Space Used: 106.5 kB
- Metadata Space Total: 33.55 MB
- Udev Sync Supported: true
- Library Version: 1.02.93-RHEL7 (2015-01-28)
-Execution Driver: native-0.2
-Kernel Version: 3.10.0-229.el7.x86_64
-Operating System: Employee SKU
-CPUs: 2
-Total Memory: 3.86 GiB
-Name: scollier-atomic-ga-kube-test-acaea32f-667a-4a54-aea3-41d1ac573c1
-ID: CNPB:PLKF:34V3:4ESX:Y3KG:XCUV:RYSQ:ZMHN:TFXF:2ENH:AR3V:MO5Q
+TODO: Update with appropriate output
 ```
 
 # Configure Docker Storage
@@ -80,12 +61,14 @@ ID: CNPB:PLKF:34V3:4ESX:Y3KG:XCUV:RYSQ:ZMHN:TFXF:2ENH:AR3V:MO5Q
 
 ```
 systemctl stop docker
+TODO: Update with appropriate output
 ```
 
 ## Remove Default Storage
 
 ```
 lvremove docker-pool
+TODO: Update with appropriate output
 ```
 
 ## Edit /etc/sysconfig/docker-storage-setup
@@ -95,24 +78,34 @@ VG=docker
 DEVS=/dev/vdb
 ```
 
+## Run `docker-storage-setup`
+
+```
+# docker-storage-setup
+TODO: Update with appropriate output
+```
+
 # Download Docker Image
 
 Pull a Docker image and notice that the data goes into the pool:
 
 ```
+TODO: choose a different image
 # docker pull registry.access.redhat.com/rhel7
 # docker info |grep 'Data Space Used'
  Data Space Used: 177 MB
 ```
 
-* Create a new container, writing 50MB of data *inside* the container. Note the container persists.
+Create a new container, writing 50MB of data *inside* the container. Note the container persists.
 
 ```
+TODO: choose a different image
 # docker run registry.access.redhat.com/rhel7 dd if=/dev/zero of=/var/tmp/data count=100000
 100000+0 records in
 100000+0 records out
 51200000 bytes (51 MB) copied, 0.0789428 s, 649 MB/s
 # docker ps -a 
+TODO: Update with appropriate output
 CONTAINER ID        IMAGE                                COMMAND                CREATED             STATUS                      PORTS               NAMES
 6d645085a215        registry.access.redhat.com/rhel7:0   "dd if=/dev/zero of=   5 seconds ago      Exited (0) 4 seconds ago                       prickly_stallman  
 # docker info |grep 'Data Space Used'
@@ -120,6 +113,7 @@ CONTAINER ID        IMAGE                                COMMAND                
 ```
 
 Now, remove the stopped container and notice that the space is freed in Docker storage:
+
 ```
 # docker rm <rhel7_container_id_or_name>
 # docker info |grep 'Data Space Used'
@@ -128,7 +122,7 @@ Now, remove the stopped container and notice that the space is freed in Docker s
 
 # Bind Mounts
 
-* Create host directory, label it, use a bind mount to write 50MB of data *outside* the container
+Create host directory, label it, use a bind mount to write 50MB of data *outside* the container
 
 ```
 # mkdir -p /var/local/containerdata
@@ -192,4 +186,4 @@ ls: cannot access /usr/etc/some*: No such file or directory
 
 *This concludes the Configure Storage lab.*
 
-[NEXT LAB](manageAtomicHosts.md)
+[NEXT LAB](3_manageAtomicHosts.md)

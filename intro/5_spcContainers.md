@@ -565,4 +565,4 @@ Apache is Working
 
 *This concludes the Super Privileged Containers lab.*
 
-[NEXT LAB](installTools.md)
+[NEXT LAB](6_installTools.md)
