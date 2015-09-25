@@ -41,6 +41,13 @@ The ```cloud-init``` images provided are basic and are not intended for use in a
 
 ### Grab the ```cloud-init``` images
 
+* [atomic-master-cidata.iso](https://people.redhat.com/jpreston/atomic-training/atomic-master-cidata.iso)
+* [atomic-host-01-cidata.iso](https://people.redhat.com/jpreston/atomic-training/atomic-host-01-cidata.iso)
+* [atomic-host-02-cidata.iso](https://people.redhat.com/jpreston/atomic-training/atomic-host-02-cidata.iso)
+* [atomic-host-03-cidata.iso](https://people.redhat.com/jpreston/atomic-training/atomic-host-03-cidata.iso)
+* [atomic-host-04-cidata.iso](https://people.redhat.com/jpreston/atomic-training/atomic-host-04-cidata.iso)
+
+Or, you can run:
 ```
 wget https://people.redhat.com/jpreston/atomic-training/atomic-master-cidata.iso
 wget https://people.redhat.com/jpreston/atomic-training/atomic-host-01-cidata.iso
@@ -55,11 +62,19 @@ We want to download the appropriate cloud image.
 
 #### Fedora Cloud Atomic (preferred)
 
+[Fedora Atomic Host](https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2)
+
+Or, you can run:
+
 ```
 wget https://download.fedoraproject.org/pub/fedora/linux/releases/22/Cloud/x86_64/Images/Fedora-Cloud-Atomic-22-20150521.x86_64.qcow2
 ```
 
 #### CentOS Cloud Atomic
+
+[CentOS Atomic Host](http://cloud.centos.org/centos/7/atomic/images/CentOS-Atomic-Host-7.1.2-GenericCloud.qcow2)
+
+Or, you can run:
 
 ```
 wget http://cloud.centos.org/centos/7/atomic/images/CentOS-Atomic-Host-7.1.2-GenericCloud.qcow2
