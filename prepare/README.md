@@ -2,16 +2,34 @@
 
 <!-- MarkdownTOC depth=4 autolink=true bracket=round -->
 
+- [Overview](#overview)
 - [Before You Arrive](#before-you-arrive)
   - [Notes, Comments and Pointers](#notes-comments-and-pointers)
-  - [Downloads](#downloads)
-    - [Grab the ```cloud-init``` images](#grab-the-cloud-init-images)
-    - [Grab the Cloud Atomic image](#grab-the-cloud-atomic-image)
-      - [Fedora Cloud Atomic (preferred)](#fedora-cloud-atomic-preferred)
-      - [CentOS Cloud Atomic](#centos-cloud-atomic)
-      - [Red Hat Enterprise Linux Atomic Host](#red-hat-enterprise-linux-atomic-host)
+- [Downloads](#downloads)
+  - [Grab the ```cloud-init``` images](#grab-the-cloud-init-images)
+  - [Grab the Cloud Atomic image](#grab-the-cloud-atomic-image)
+    - [Fedora Cloud Atomic (preferred)](#fedora-cloud-atomic-preferred)
+    - [CentOS Cloud Atomic](#centos-cloud-atomic)
+    - [Red Hat Enterprise Linux Atomic Host](#red-hat-enterprise-linux-atomic-host)
 
 <!-- /MarkdownTOC -->
+# Overview
+
+_Please be advised that this training may require Internet access for things such as downloading updates and Docker images._
+
+The purpose of this training to to quickly demonstrate an application-centric IT architecture by providing an end-to-end solution for deploying containerized applications quickly and reliably, with atomic update and rollback for application and host alike.
+
+We're going to be building 5 systems, one master and four hosts.  These directions will produce the following systems:
+
+| hostname       | ip             | roles                                              |
+|----------------|----------------|----------------------------------------------------|
+| atomic-master  | 192.168.122.10 | cluster master, docker registry, ostree repository |
+| atomic-host-01 | 192.168.122.11 | atomic container host                              |
+| atomic-host-02 | 192.168.122.12 | atomic container host                              |
+| atomic-host-03 | 192.168.122.13 | atomic container host                              |
+| atomic-host-04 | 192.168.122.14 | atomic container host                              |
+
+![Infrastructure Overview](infrastructure-diagram.png "Infrastructure Overview")
 
 # Before You Arrive
 
@@ -22,14 +40,14 @@ In order to make best use of lab time, please review the deployment options and 
 
 Minimal time will be allocated during the training to get functional lab environments.
 
-### Notes, Comments and Pointers
+## Notes, Comments and Pointers
 
 * It is assumed that you will be utilizing Fedora Cloud Atomic
 * Use sudo and appropriate permissions; insert standard security warnings here
 * Correct IPs, hostnames, paths and locations to match your setup
 * You will need to change the bridge device and/or adapter to match your setup
 
-## Downloads
+# Downloads
 
 We are going to be working with the Fedora Cloud Atomic image, however, this training should work with little to no modification on CentOS Atomic and Red Hat Enterprise Linux Atomic Host.
 
