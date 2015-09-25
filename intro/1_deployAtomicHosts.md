@@ -7,7 +7,7 @@
 - [Deployment Option: KVM Environment Setup (preferred)](#deployment-option-kvm-environment-setup-preferred)
   - [Install the Atomic ```cloud-init``` images](#install-the-atomic-cloud-init-images)
   - [Install "gold" VM Image](#install-gold-vm-image)
-  - [Install the VM images (adjust BRIDGE appropriately)](#install-the-vm-images-adjust-bridge-appropriately)
+  - [Install the VM images](#install-the-vm-images)
 - [Deployment Option: VirtualBox Environment Setup](#deployment-option-virtualbox-environment-setup)
   - [Create VM Data Paths](#create-vm-data-paths)
   - [Install ISO images](#install-iso-images)
@@ -72,7 +72,7 @@ Make copy-on-write images, using the downloaded image as a "gold" master.
 sudo cp ${A_IMAGE}.qcow2 /var/lib/libvirt/images/.
 ```
 
-### Install the VM images (adjust BRIDGE appropriately)
+### Install the VM images
 
 ```bash
 # adjust the bridge appropriately
