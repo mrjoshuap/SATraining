@@ -5,7 +5,8 @@ type -a genisoimage >/dev/null 2>&1 && mkdir -p prepare/iso prepare/log && for A
 	test -d ${A_HOST} && genisoimage \
     -output prepare/iso/${A_HOST}-cidata.iso \
     -volid cidata -joliet \
-    -rock prepare/${A_HOST}/user-data prepare/${A_HOST}/meta-data > prepare/log/${A_HOST}-cidata.log 2>&1
+    -rock prepare/${A_HOST}/user-data \
+    prepare/${A_HOST}/meta-data > prepare/log/${A_HOST}-cidata.log 2>&1
 done
 
 # Generate our index file from the readme.md
