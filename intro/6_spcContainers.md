@@ -11,8 +11,8 @@
   - [Test the configuration.](#test-the-configuration)
   - [More on the Atomic command](#more-on-the-atomic-command)
   - [Using sadc](#using-sadc)
-  - [Building your own SPC - Example 1](#building-your-own-spc---example-1)
-  - [Building your own SPC - Example 2](#building-your-own-spc---example-2)
+  - [Example 1: Building your own SPC](#example-1-building-your-own-spc)
+  - [Example 2: Building your own SPC](#example-2-building-your-own-spc)
 
 <!-- /MarkdownTOC -->
 
@@ -285,7 +285,7 @@ Linux 3.10.0-229.el7.x86_64 (atomic-00.localdomain) 	02/27/2015 	_x86_64_	(2 CPU
 ```
 
 
-### Building your own SPC - Example 1
+### Example 1: Building your own SPC
 
 
 You can build your own SPC using the Dockerfile and the LABEL options. This lab can be done on node 1.
@@ -317,7 +317,7 @@ Once built, you can test your image:
 # atomic uninstall test
 ```
 
-### Building your own SPC - Example 2
+### Example 2: Building your own SPC
 
 This example will be a bit more complicated. We will introduce _systemd_ and more complex _labels_.
 

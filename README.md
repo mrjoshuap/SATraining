@@ -52,8 +52,8 @@ Learn what it is, who provides it, where it can be installed, how it is managed,
 1. [Configure Storage](intro/2_configureStorage.md)
 1. [Manage Atomic Hosts](intro/3_manageAtomicHosts.md)
 1. [Service Containers](intro/4_svcContainers.md)
-1. [Super Privileged Containers](intro/5_spcContainers.md)
-1. [Install Tools](intro/6_installTools.md)
+1. [Install Atomic Tools](intro/5_installAtomicTools.md)
+1. [Super Privileged Containers](intro/6_spcContainers.md)
 
 ### Class 2: Advanced Project Atomic
 
