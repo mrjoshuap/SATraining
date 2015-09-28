@@ -1,142 +1,41 @@
+# Service Containers
+
+<!-- MarkdownTOC depth=4 autolink=true bracket=round -->
+
+- [Agenda](#agenda)
+  - [Begin](#begin)
+- [Using Super Privileged Containers on Atomic Host](#using-super-privileged-containers-on-atomic-host)
+  - [Using rsyslog](#using-rsyslog)
+    - [Scenario 1: Quick Smoketest](#scenario-1-quick-smoketest)
+    - [Scenario 2: Remote Logging](#scenario-2-remote-logging)
+  - [Test the configuration.](#test-the-configuration)
+  - [More on the Atomic command](#more-on-the-atomic-command)
+  - [Using sadc](#using-sadc)
+  - [Building your own SPC - Example 1](#building-your-own-spc---example-1)
+  - [Building your own SPC - Example 2](#building-your-own-spc---example-2)
+
+<!-- /MarkdownTOC -->
+
+## Agenda
+
+The goal here is to explore some of the images that we will be distributing for Atomic. We are trying to keep the Atomic image as small as possible where it makes sense. This means that anything else that gets added to the Atomic Host will have to be inside a container. The examples we will go over in this section are rsyslog and sadc. For this to work, you need at least two functioning Atomic Hosts (which will be referred to as node 1 and node 2).  Additionally, we will be utilizing the atomic-tools container which we discussed in the previous topic.
+
+### Begin
+
+_NOTE: We will be working on the `atomic-master`._
+
+* Login to the `atomic-master`
+
 ## Using Super Privileged Containers on Atomic Host
 
-The goal here is to explore some of the images that we will be distributing for Atomic. We are trying to keep the Atomic image as small as possible where it makes sense. This means that anything else that gets added to the Atomic Host will have to be inside a container. The examples we will go over in this section are rhel-tools, rsyslog, and sadc. For this to work, you need at least two functioning Atomic Hosts (which will be referred to as node 1 and node 2).
-
-### Using rhel-tools
-
-As we saw in the previous labs, the rhel-tools container provides the core system administrator and core developer tools to execute tasks on Red Hat Enterprise Linux 7 Atomic Host. The tools container leverages the atomic command for installation, activation and management.
-
-* Install the rhel-tools container. You can do this on whichever system you want to be node 1.
-
-```
-# atomic install [REGISTRY]/rhel7/rhel-tools
-Pulling repository [REGISTRY]/rhel7/rhel-tools
-9a8ad4567c27: Download complete 
-Status: Downloaded newer image for [REGISTRY]/rhel7/rhel-tools:latest
-```
-
-Run the rhel-tools container. Notice how you are dropped to the prompt inside the container.
-
-```
-# atomic run [REGISTRY]/rhel7/rhel-tools
-docker run -it --name rhel-tools --privileged --ipc=host --net=host --pid=host -e HOST=/host -e NAME=rhel-tools -e IMAGE=[REGISTRY]/rhel7/rhel-tools -v /run:/run -v /var/log:/var/log -v /etc/localtime:/etc/localtime -v /:/host [REGISTRY]/rhel7/rhel-tools
-[root@atomic-00 /]#
-```
-
-* Remember those commands at the end of the Atomic deployment lab? The ones that did not work? Try them again.
-
-```
-man tcpdump
-
-git
-
-tcpdump
-
-sosreport
-```
-
-* Explore the environment. Check processes:
-
-```
-# ps aux
-USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-root          1  0.0  0.1  61880  7720 ?        Ss   Feb20   0:03 /usr/lib/systemd/systemd --switched-root --system --deserialize 22
-root          2  0.0  0.0      0     0 ?        S    Feb20   0:00 [kthreadd]
-root          3  0.0  0.0      0     0 ?        S    Feb20   0:15 [ksoftirqd/0]
-root          5  0.0  0.0      0     0 ?        S<   Feb20   0:00 [kworker/0:0H]
-root          7  0.0  0.0      0     0 ?        S    Feb20   0:00 [migration/0]
-<snip>
-```
-
-* Check the environment variables:
-
-```
-# env
-HOSTNAME=atomic-00.localdomain
-HOST=/host
-TERM=xterm
-NAME=rhel-tools
-```
-
-* Run an sosreport. Notice where it is saved to, the sosreport tool has been modified to work in a container environment.
-
-```
-# sosreport 
-
-sosreport (version 3.2)
-
-This command will collect diagnostic and configuration information from
-this Red Hat Atomic Host system.
-
-<snip>
-
-Your sosreport has been generated and saved in:
-  /host/var/tmp/sosreport-scollier.12344321-20150225144723.tar.xz
-
-The checksum is: 9de2decce230cd4b2b84ab4f41ec926e
-
-Please send this file to your support representative.
-```
-
-Notice that the host os is mounted into /host within the container.
-
-```
-chroot /host
-```
-
-You are back in the host.
-
-```
-^d
-```
-
-You are back in the container. You may also notice that /run is from the host
-and you see the host's network and processes, but you are still in a container.
-
-Let's play around a little more.
-
-* Clone a git repo, and save the repo to the host filesystem, not to the image filesystem.
-
-```
-# git clone https://github.com/GoogleCloudPlatform/kubernetes.git /host/tmp/kubernetes
-Cloning into '/host/tmp/kubernetes'...
-remote: Counting objects: 48730, done.
-remote: Compressing objects: 100% (22/22), done.
-remote: Total 48730 (delta 7), reused 0 (delta 0), pack-reused 48708
-Receiving objects: 100% (48730/48730), 30.44 MiB | 9.63 MiB/s, done.
-Resolving deltas: 100% (32104/32104), done.
-```
-
-Exit the container and look at the git repo and the sosreport output. Hit CTRL-D to exit the container, or type _exit_.
-
-```
-# ls {/tmp,/var/tmp/}
-/tmp:
-ks-script-K46kdd  ks-script-Si6KRr  kubernetes
-
-/var/tmp/:
-sosreport-scollier.12344321-20150225144723.tar.xz  sosreport-scollier.12344321-20150225144723.tar.xz.md5
-```
-
-```
-less /var/log/messages
-```
-Notice on a RHEL Atomic Host there is no syslog by default. You can look at the log messages using journald.
-
-```
-journalctl 
-```
-
-If you want to use rsyslog on your host, you need to install the rsyslog SPC container.
-
-###Using rsyslog
+### Using rsyslog
 
 The rsyslog container runs in the background for the purposes of managing logs. We will cover two scenarios:
 
 1. Quick smoke test to make sure logging is working on the localhost.
 2. Remote logging, where we will send some logs over the network to another system.
 
-####Scenario 1: Quick Smoketest
+#### Scenario 1: Quick Smoketest
 
 * Check the environment before starting, you may have a few residual images. You should not have any rsyslog images. Perform this on node 1:
 
@@ -153,7 +52,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 # atomic install rhel7/rsyslog
 Pulling repository [PRIVATE_REGISTRY]/rhel7/rsyslog
-b5168acccb4c: Download complete 
+b5168acccb4c: Download complete
 Status: Downloaded newer image for [PRIVATE_REGISTRY]/rhel7/rsyslog:latest
 docker run --rm --privileged -v /:/host -e HOST=/host -e IMAGE=[PRIVATE_REGISTRY]/rhel7/rsyslog -e NAME=rsyslog [PRIVATE_REGISTRY]/rhel7/rsyslog /bin/install.sh
 Creating directory at /host//etc/pki/rsyslog
@@ -186,7 +85,7 @@ docker run -d --privileged --name rsyslog --net=host -v /etc/pki/rsyslog:/etc/pk
 ```
 # docker ps -a
 CONTAINER ID        IMAGE                            COMMAND             CREATED             STATUS              PORTS               NAMES
-55ff84fcc332        [PRIVATE_REGISTRY]/rhel7/rsyslog:7.1-3   "/bin/rsyslog.sh"   2 minutes ago       Up 2 minutes                            rsyslog             
+55ff84fcc332        [PRIVATE_REGISTRY]/rhel7/rsyslog:7.1-3   "/bin/rsyslog.sh"   2 minutes ago       Up 2 minutes                            rsyslog
 ```
 
 * How do I use it (scenario 1: single host smoke test)? In a terminal on node 1, watch the logs.
@@ -207,7 +106,7 @@ logger test
 Feb  9 16:31:36 localhost vagrant: test
 ```
 
-####Scenario 2: Remote Logging
+#### Scenario 2: Remote Logging
 
 Stop the rsyslog container on node 1. We are going to make a change to the `/etc/rsyslog.conf` file and we will need to re-read that. Use the following steps to stop the container. After the container is stopped, you can change the file and restart the container.
 
@@ -266,7 +165,7 @@ $template FILENAME,"/var/log/%fromhost-ip%/syslog.log"
 # atomic run --name rsyslog rhel7/rsyslog
 ```
 
-###Test the configuration.
+### Test the configuration.
 
 * On node 1 open a terminal, make sure rsyslog is started with `atomic` run, and issue the command `logger remote test`.
 
@@ -304,16 +203,16 @@ Release      : 3
 Vendor       : Red Hat, Inc.
 ```
 
-###Using sadc
+### Using sadc
 
-The sadc container is our "system activity data collector", it is the daemon that runs in the background that provides the ongoing performance data that sar parses and presents to you. This container is meant to run in the background only, it is not an interactive container like rhel-tools.
+The sadc container is our "system activity data collector", it is the daemon that runs in the background that provides the ongoing performance data that sar parses and presents to you. This container is meant to run in the background only, it is not an interactive container like atomic-tools.
 
 * Do these steps on node 1 only. Install the sadc container:
 
 ```
 # atomic install rhel7/sadc
 Pulling repository [PRIVATE_REGISTRY]/rhel7/sadc
-1a97a9cc4d1b: Download complete 
+1a97a9cc4d1b: Download complete
 Status: Downloaded newer image for [PRIVATE_REGISTRY]/rhel7/sadc:latest
 docker run --rm --privileged --name sadc -v /:/host -e HOST=/host -e IMAGE=[PRIVATE_REGISTRY]/rhel7/sadc -e NAME=name [PRIVATE_REGISTRY]/rhel7/sadc /usr/local/bin/sysstat-install.sh
 Installing file at /host//etc/cron.d/sysstat
@@ -352,7 +251,7 @@ docker run -d --privileged --name sadc -v /etc/sysconfig/sysstat:/etc/sysconfig/
 
 # docker ps -l
 CONTAINER ID        IMAGE                          COMMAND                CREATED             STATUS              PORTS               NAMES
-79bf6243c05a        [PRIVATE_REGISTRY]/rhel7/sadc:7.1-3    "/usr/local/bin/syss"   33 seconds ago      Up 32 seconds                           sadc              
+79bf6243c05a        [PRIVATE_REGISTRY]/rhel7/sadc:7.1-3    "/usr/local/bin/syss"   33 seconds ago      Up 32 seconds                           sadc
 ```
 
 * Check the status of the files in /var/log/:
@@ -370,7 +269,7 @@ Change: 2015-02-25 01:40:07.042784999 +0000
  Birth: -
 ```
 
-* Run the RHEL Tools container:
+* Run the Atomic Tools container:
 
 ```
 # atomic run rhel7/rhel-tools
@@ -386,7 +285,7 @@ Linux 3.10.0-229.el7.x86_64 (atomic-00.localdomain) 	02/27/2015 	_x86_64_	(2 CPU
 ```
 
 
-###Building your own SPC - Example 1
+### Building your own SPC - Example 1
 
 
 You can build your own SPC using the Dockerfile and the LABEL options. This lab can be done on node 1.
@@ -418,9 +317,9 @@ Once built, you can test your image:
 # atomic uninstall test
 ```
 
-###Building your own SPC - Example 2
+### Building your own SPC - Example 2
 
-This example will be a bit more complicated. We will introduce _systemd_ and more complex _labels_. 
+This example will be a bit more complicated. We will introduce _systemd_ and more complex _labels_.
 
 Set up your directory structure on node 1:
 
@@ -540,7 +439,7 @@ services.
 Now you need to run the container:
 
 ```
-# atomic run httpd 
+# atomic run httpd
 docker run -dt -p 80 -v /sys/fs/cgroup:/sys/fs/cgroup httpd
 1847d02d4a68994e048297dd6e65e093cfe4bc9808479201977595f23251dda1
 ```
@@ -564,5 +463,3 @@ Apache is Working
 
 
 *This concludes the Super Privileged Containers lab.*
-
-[NEXT LAB](6_installTools.md)
