@@ -1,5 +1,5 @@
 [Unit]
-Description=atomicmirror RPM OSTree Repository
+Description=atomicmirror NAME
 After=Docker.service
 
 [Service]

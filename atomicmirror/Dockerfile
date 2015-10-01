@@ -3,13 +3,13 @@ FROM fedora:22
 MAINTAINER Joshua Preston <jpreston@redhat.com>
 
 LABEL Name=atomicmirror
+LABEL Description="a container that is used to host a mirror of atomic rpm-ostree repositories"
 LABEL Version=1.0
 LABEL Vendor="Red Hat" License=GPLv3
-LABEL Description="a container that is used to host a mirror of atomic rpm-ostree repositories"
 
 # Setup our locations
 
-ENV CONFDIR /etc/atomicmirror
+ENV CONFDIR /etc/atomicmirror/
 ENV DATADIR /var/lib/atomicmirror
 ENV LOGDIR  /var/log/atomicmirror
 
@@ -19,9 +19,9 @@ ENV OSTREE_ENABLE_REPOS fedora-atomic-22
 
 # Setup our atomic labels properly
 
-LABEL INSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name atomicmirror -e NAME=atomicmirror -e IMAGE=IMAGE IMAGE /usr/local/bin/install.sh"
+LABEL INSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name NAME -e NAME=NAME -e IMAGE=IMAGE IMAGE /usr/local/bin/install.sh"
 LABEL RUN="docker run -d -v ${CONFDIR} -v ${DATADIR} -v ${LOGDIR} -p 8000 -n atomicmirror"
-LABEL UNINSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name atomicmirror -e NAME=atomicmirror -e IMAGE=IMAGE IMAGE /usr/local/bin/uninstall.sh"
+LABEL UNINSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name NAME -e NAME=NAME -e IMAGE=IMAGE IMAGE /usr/local/bin/uninstall.sh"
 
 # install needed packages
 
@@ -42,7 +42,7 @@ RUN chmod +x /usr/local/bin/*.sh
 
 # install our atomicmirror service for systemd
 
-COPY atomicmirror.service /etc/systemd/system/atomicmirror.service
+COPY atomicmirror_template.service /etc/systemd/system/atomicmirror_template.service
 
 # install our repository configs
 
