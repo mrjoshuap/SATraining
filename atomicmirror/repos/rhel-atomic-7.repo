@@ -1,0 +1,3 @@
+OSTREE_GPG_VERIFY=false
+OSTREE_ORIGIN_URL=https://cdn.redhat.com/content/dist/rhel/atomic/7/7Server/x86_64/ostree/repo/
+OSTREE_ORIGIN_REF=rhel-atomic-host/7/x86_64/standard
