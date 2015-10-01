@@ -5,7 +5,7 @@ MAINTAINER Joshua Preston <jpreston@redhat.com>
 LABEL Name=atomicmirror
 LABEL Version=1.0
 LABEL Vendor="Red Hat" License=GPLv3
-LABEL Description="The Apache PHP Application is a example of using atomic command to install a service onto a machine."
+LABEL Description="a container that is used to host a mirror of atomic rpm-ostree repositories"
 
 # Setup our locations
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+env | tee ${LOGDIR}/atomicmirror.log
+
 if [ "${OSTREE_ENABLE_REPOS}x" = "x" ]; then
   echo "ERROR: No ostree repositories specified!" | tee ${LOGDIR}/atomicmirror.log
   exit -1
