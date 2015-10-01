@@ -25,7 +25,7 @@ LABEL UNINSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR
 
 # install needed packages
 
-RUN dnf upgrade -y \
+RUN dnf upgrade -y; \
     dnf install -y rpm-ostree polipo; \
     dnf clean all
 
