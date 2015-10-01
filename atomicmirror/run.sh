@@ -17,7 +17,7 @@ for OSTREE_REPO in ${OSTREE_ENABLE_REPOS}; do
   unset OSTREE_GPG_VERIFY OSTREE_ORIGIN_URL OSTREE_ORIGIN_REF
   source "${CONFDIR}/repos/${OSTREE_REPO}.repo"
 
-  if [ ! -d "${DATADIR}/${OSTREE_REPO}" ]; then
+  if [[ ! -d "${DATADIR}/${OSTREE_REPO}" && ! -f "${DATADIR}/${OSTREE_REPO}/config" ]]; then
     mkdir -p "${DATADIR}/${OSTREE_REPO}"
     ostree --repo="${DATADIR}/${OSTREE_REPO}" init --mode=archive-z2 | tee ${LOGDIR}/atomicmirror.log
     ostree --repo="${DATADIR}/${OSTREE_REPO}" remote add --set=gpg-verify=${OSTREE_GPG_VERIFY} origin ${OSTREE_ORIGIN_URL} | tee ${LOGDIR}/atomicmirror.log
