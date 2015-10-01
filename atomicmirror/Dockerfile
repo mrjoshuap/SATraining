@@ -20,7 +20,7 @@ ENV OSTREE_ENABLE_REPOS fedora-atomic-22
 # Setup our atomic labels properly
 
 LABEL INSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name NAME -e NAME=NAME -e IMAGE=IMAGE IMAGE /usr/local/bin/install.sh"
-LABEL RUN="docker run -d -v ${CONFDIR} -v ${DATADIR} -v ${LOGDIR} -p 8000 -n atomicmirror"
+LABEL RUN="docker run -d -v ${CONFDIR} -v ${DATADIR} -v ${LOGDIR} -p 8000 -e NAME=NAME --name NAME IMAGE"
 LABEL UNINSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name NAME -e NAME=NAME -e IMAGE=IMAGE IMAGE /usr/local/bin/uninstall.sh"
 
 # install needed packages
