@@ -1,5 +1,12 @@
 #!/bin/sh
 
+PATH="/bin:/sbin"
+
+if [ ! -f ${HOST}/etc/os-release -o ! -d ${HOST}/var/run ]; then
+    echo "atomicmirror: host file system is not mounted at /host" >&2
+    exit -1
+fi
+
 # Make required directories on host
 mkdir -p ${HOST}/${CONFDIR} ${HOST}/${DATADIR}/${NAME} ${HOST}/${LOGDIR}/${NAME}
 
