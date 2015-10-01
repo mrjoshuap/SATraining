@@ -2,6 +2,11 @@ FROM fedora:22
 
 MAINTAINER Joshua Preston <jpreston@redhat.com>
 
+LABEL Name=atomicmirror
+LABEL Version=1.0
+LABEL Vendor="Red Hat" License=GPLv3
+LABEL Description="The Apache PHP Application is a example of using atomic command to install a service onto a machine."
+
 # Setup our locations
 
 ENV CONFDIR /etc/atomicmirror
@@ -12,6 +17,12 @@ ENV LOGDIR  /var/log/atomicmirror
 
 ENV OSTREE_ENABLE_REPOS fedora-atomic-22
 
+# Setup our atomic labels properly
+
+LABEL INSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name atomicmirror -e NAME=atomicmirror -e IMAGE=IMAGE IMAGE /usr/local/bin/install.sh"
+LABEL RUN="docker run -d -v ${CONFDIR} -v ${DATADIR} -v ${LOGDIR} -p 8000 -n atomicmirror"
+LABEL UNINSTALL="docker run --rm --privileged -v /:/host -e HOST=/host -e LOGDIR=${LOGDIR} -e CONFDIR=${CONFDIR} -e DATADIR=${DATADIR} --name atomicmirror -e NAME=atomicmirror -e IMAGE=IMAGE IMAGE /usr/local/bin/uninstall.sh"
+
 # install needed packages
 
 RUN dnf install -y rpm-ostree polipo; \
@@ -21,10 +32,17 @@ RUN dnf install -y rpm-ostree polipo; \
 
 RUN mkdir -p ${CONFDIR} ${DATADIR} ${LOGDIR}
 
-# install our run.sh script that does our magic
+# install our scripts that does our magical dirty work
 
+COPY install.sh /usr/local/bin/install.sh
 COPY run.sh /usr/local/bin/run.sh
-RUN chmod +x /usr/local/bin/run.sh
+COPY uninstall.sh /usr/local/bin/uninstall.sh
+
+RUN chmod +x /usr/local/bin/*.sh
+
+# install our atomicmirror service for systemd
+
+COPY atomicmirror.service /etc/systemd/system/atomicmirror.service
 
 # install our repository configs
 

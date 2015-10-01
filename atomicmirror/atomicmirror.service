@@ -1,0 +1,10 @@
+[Unit]
+Description=atomicmirror RPM OSTree Repository
+After=Docker.service
+
+[Service]
+ExecStart=/usr/bin/docker start NAME
+ExecStop=/usr/bin/docker stop NAME
+
+[Install]
+WantedBy=multi-user.target
