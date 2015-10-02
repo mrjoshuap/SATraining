@@ -8,13 +8,13 @@ if [ ! -f ${HOST}/etc/os-release -o ! -d ${HOST}/var/run ]; then
 fi
 
 # Make required directories on host
-mkdir -p ${HOST}/${CONFDIR} ${HOST}/${DATADIR}/${NAME} ${HOST}/${LOGDIR}/${NAME}
+mkdir -p ${HOST}/${CONFDIR}/${NAME} ${HOST}/${DATADIR}/${NAME} ${HOST}/${LOGDIR}/${NAME}
 
 # Copy repository information
-cp -pR ${CONFDIR}/repos ${HOST}/${CONFDIR}
+cp -pR ${CONFDIR}/repos ${HOST}/${CONFDIR}/${NAME}
 
 # Create container
-chroot ${HOST} /usr/bin/docker create -p 8000 -v ${CONFDIR}:${CONFDIR}/${NAME}:Z -v ${LOGDIR}:${LOGDIR}/${NAME}:Z -v ${DATADIR}:${DATDIR}/${NAME}:Z --name ${NAME} ${IMAGE}
+chroot ${HOST} /usr/bin/docker create -p 8000 -v ${CONFDIR}/${NAME}:${CONFDIR}:Z -v ${LOGDIR}/${NAME}:${LOGDIR}:Z -v ${DATADIR}/${NAME}:${DATDIR}:Z --name ${NAME} ${IMAGE}
 
 # Install systemd unit file for running container
 sed -e "s/NAME/${NAME}/g" /etc/systemd/system/atomicmirror_template.service > ${HOST}/etc/systemd/system/atomicmirror_${NAME}.service
