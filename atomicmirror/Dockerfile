@@ -9,7 +9,7 @@ LABEL Vendor="Red Hat" License=GPLv3
 
 # Setup our locations
 
-ENV CONFDIR /etc/atomicmirror/
+ENV CONFDIR /etc/atomicmirror
 ENV DATADIR /var/lib/atomicmirror
 ENV LOGDIR  /var/log/atomicmirror
 
