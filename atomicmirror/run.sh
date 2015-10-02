@@ -40,7 +40,7 @@
     && polipo \
       && echo "ok" \
       || echo "failed"
-} | tee -a ${LOGDIR}/${NAME}.log
+} | tee -a ${LOGDIR}/atomicmirror.log
 
 echo "Starting SimpleHTTPServer..." \
-  && python -m SimpleHTTPServer | tee -a ${LOGDIR}/${NAME}_access.log
+  && python -m SimpleHTTPServer | tee -a ${LOGDIR}/access.log
