@@ -1,8 +1,10 @@
 [Unit]
-Description=atomicmirror NAME
+Description=atomicmirror ostree repository: NAME
+Requires=docker.service
 After=Docker.service
 
 [Service]
+Restart=always
 ExecStart=/usr/bin/docker start NAME
 ExecStop=/usr/bin/docker stop NAME
 
