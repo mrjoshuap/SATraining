@@ -14,7 +14,7 @@ mkdir -p ${HOST}/${CONFDIR}/${NAME} ${HOST}/${DATADIR}/${NAME} ${HOST}/${LOGDIR}
 cp -pR ${CONFDIR}/repos ${HOST}/${CONFDIR}/${NAME}
 
 # Create container
-chroot ${HOST} /usr/bin/docker create -p 8000 -v ${CONFDIR}/${NAME}:${CONFDIR}:Z -v ${LOGDIR}/${NAME}:${LOGDIR}:Z -v ${DATADIR}/${NAME}:${DATDIR}:Z --name ${NAME} ${IMAGE}
+chroot ${HOST} /usr/bin/docker create -p 8000 -v ${CONFDIR}/${NAME}:${CONFDIR}:Z -v ${LOGDIR}/${NAME}:${LOGDIR}:Z -v ${DATADIR}/${NAME}:${DATADIR}:Z --name ${NAME} ${IMAGE}
 
 # Install systemd unit file for running container
 sed -e "s/NAME/${NAME}/g" /etc/systemd/system/atomicmirror_template.service > ${HOST}/etc/systemd/system/atomicmirror_${NAME}.service
